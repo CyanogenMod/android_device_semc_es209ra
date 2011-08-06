@@ -1,5 +1,7 @@
 #!/system/xbin/sh
 
+/system/bin/charger
+
 sleep 2
 kill -9 $!
 

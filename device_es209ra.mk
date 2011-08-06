@@ -55,7 +55,7 @@ PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/bootrec:root/sbin/bootrec \
     device/semc/es209ra/recovery.fstab:root/recovery.fstab \
     device/semc/es209ra/prebuilt/vold.fstab:system/etc/vold.fstab \
-    device/semc/es209ra/prebuilt/logo.rle:root/logo.rle \
+    device/semc/es209ra/prebuilt/initlogo.rle:root/initlogo.rle 
 
     
 #xrecovery
@@ -64,7 +64,6 @@ PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/miniloader:system/kernel/miniloader \
     device/semc/es209ra/prebuilt/splboot.ko:system/kernel/splboot.ko \
     device/semc/es209ra/prebuilt/sh:system/xbin/sh
-#    device/semc/es209ra/prebuilt/boot.img:system/kernel/boot.img \
 
 #WIFI modules and configs
 PRODUCT_COPY_FILES += \

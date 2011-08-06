@@ -15,6 +15,7 @@ rm -r /sdcard
 rm -r /not/sdcard
 mkdir /sdcard
 mkdir /tmp
+rm /etc
 mkdir /etc
 cp /recovery.fstab /etc/recovery.fstab
 mount /dev/block/mmcblk0p1 /sdcard
@@ -34,6 +35,7 @@ rm -r /sdcard
 rm -r /not/sdcard
 mkdir /sdcard
 mkdir /tmp
+rm /etc
 mkdir /etc
 cp /recovery.fstab /etc/recovery.fstab
 mount /dev/block/mmcblk0p1 /sdcard
@@ -43,4 +45,3 @@ fi
 
 #continue booting
 
-/system/bin/charger
