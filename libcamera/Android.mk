@@ -1,5 +1,4 @@
-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),es209raa) 
-#new
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),es209ra)
 
 # When zero we link against libmmcamera; when 1, we dlopen libmmcamera.
 DLOPEN_LIBMMCAMERA:=1
@@ -14,8 +13,6 @@ LOCAL_SRC_FILES:= QualcommCameraHardware.cpp
 
 LOCAL_CFLAGS:= -DDLOPEN_LIBMMCAMERA=$(DLOPEN_LIBMMCAMERA)
 
-## Can be raised to 6 to improve framerate, at the cost of allocating
-## more ADSP memory. Use 0xa68000 as pool size in kernel to test
 LOCAL_CFLAGS+= -DNUM_PREVIEW_BUFFERS=4 -D_ANDROID_
 
 LOCAL_C_INCLUDES+= \

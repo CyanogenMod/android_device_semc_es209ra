@@ -35,7 +35,7 @@
 
 extern "C" {
 #include <linux/android_pmem.h>
-#include <msm_camera.h>
+#include "msm_camera.h"
 }
 
 struct str_map {
@@ -69,16 +69,16 @@ struct board_property{
 #define FALSE 0
 
 #define CAMERA_MIN_CONTRAST 0
-#define CAMERA_MAX_CONTRAST 4
+#define CAMERA_MAX_CONTRAST 6
 #define CAMERA_MIN_SHARPNESS 0
 #define CAMERA_MIN_EXPOSURE_COMPENSATION 0
-#define CAMERA_MAX_SHARPNESS 4
+#define CAMERA_MAX_SHARPNESS 10
 #define CAMERA_MIN_SATURATION 0
-#define CAMERA_MAX_SATURATION 4
+#define CAMERA_MAX_SATURATION 10
 #define CAMERA_MAX_EXPOSURE_COMPENSATION 8
-#define CAMERA_DEF_SHARPNESS 2
-#define CAMERA_DEF_CONTRAST 3
-#define CAMERA_DEF_SATURATION 2
+#define CAMERA_DEF_SHARPNESS 10
+#define CAMERA_DEF_CONTRAST 6
+#define CAMERA_DEF_SATURATION 6
 #define CAMERA_DEF_EXPOSURE_COMPENSATION "2.0"
 #define CAMERA_EXPOSURE_COMPENSATION_STEP 2
 
@@ -90,7 +90,7 @@ struct board_property{
 
 #define MINIMUM_FPS 10
 #define DEFAULT_FPS 15
-#define MAXIMUM_FPS 25
+#define MAXIMUM_FPS 20
 
 typedef struct {
 	unsigned int in1_w;
@@ -107,8 +107,6 @@ typedef struct {
 typedef uint8_t cam_ctrl_type;
 
 typedef struct {
-	unsigned short video_width;
-	unsigned short video_height;
 	unsigned short picture_width;
 	unsigned short picture_height;
 	unsigned short display_width;
@@ -119,6 +117,8 @@ typedef struct {
 	unsigned short ui_thumbnail_width;
 	unsigned short thumbnail_width;
 	unsigned short thumbnail_height;
+	unsigned short video_width;
+	unsigned short video_height;
 	unsigned short raw_picture_height;
 	unsigned short raw_picture_width;
 	unsigned short filler7;
@@ -226,18 +226,17 @@ struct fifo_node *dequeue(struct fifo_queue *queue) {
 	return node;
 }
 
-
 enum camera_ops {
     CAMERA_SET_PARM_ENCODE_ROTATION,
     CAMERA_SET_PARM_DIMENSION,
     CAMERA_SET_PARM_ZOOM,
     CAMERA_SET_PARM_SENSOR_POSITION,
-    CAMERA_SET_PARM_SHARPNESS,
+    CAMERA_SET_PARM_FOCUS_RECT,
     CAMERA_SET_PARM_LUMA_ADAPTATION,
     CAMERA_SET_PARM_CONTRAST,
-    CAMERA_SET_PARM_EXPOSURE_COMPENSATION,
     CAMERA_SET_PARM_BRIGHTNESS,
-    CAMERA_SET_PARM_FOCUS_RECT,
+    CAMERA_SET_PARM_EXPOSURE_COMPENSATION,
+    CAMERA_SET_PARM_SHARPNESS,
     CAMERA_SET_PARM_HUE,
     CAMERA_SET_PARM_SATURATION,
     CAMERA_SET_PARM_EXPOSURE,
@@ -256,7 +255,7 @@ enum camera_ops {
     CAMERA_SET_PARM_AUTO_EXPOSURE_MODE,
     CAMERA_SET_PARM_ISO,
     CAMERA_SET_PARM_BESTSHOT_MODE,
-    CAMERA_SET_PARM_PREVIEW_FPS,
+    CAMERA_SET_PARM_PREVIEW_FPS=29,
     CAMERA_SET_PARM_AF_MODE,
     CAMERA_SET_PARM_HISTOGRAM,
     CAMERA_SET_PARM_FLASH_STATE,
@@ -264,27 +263,26 @@ enum camera_ops {
     CAMERA_SET_PARM_STROBE_FLASH,
     CAMERA_SET_PARM_FPS_LIST,
     CAMERA_SET_PARM_HJR,
-    CAMERA_SET_PARM_ROLLOFF=37,
-    CAMERA_STOP_PREVIEW=38,
+    CAMERA_SET_PARM_ROLLOFF,
+    CAMERA_STOP_PREVIEW,
     CAMERA_START_PREVIEW,
     CAMERA_START_SNAPSHOT,
-    CAMERA_START_VIDEO,
-    CAMERA_STOP_SNAPSHOT=42,
-    CAMERA_EXIT=43,
-    CAMERA_STOP_VIDEO,
-    CAMERA_START_RECORDING,
-    CAMERA_STOP_RECORDING,
-    CAMERA_GET_PARM_MAXZOOM,
     CAMERA_START_RAW_SNAPSHOT,
-    CAMERA_SET_PARM_LED_MODE,
+    CAMERA_STOP_SNAPSHOT,
+    CAMERA_EXIT,
+    CAMERA_GET_PARM_MAXZOOM=47,
     CAMERA_GET_PARM_AF_SHARPNESS,
+    CAMERA_SET_PARM_LED_MODE,
     CAMERA_SET_MOTION_ISO,
     CAMERA_AUTO_FOCUS_CANCEL,
     CAMERA_GET_PARM_FOCUS_STEP,
     CAMERA_ENABLE_AFD,
     CAMERA_PREPARE_SNAPSHOT,
     CAMERA_SET_FPS_MODE,
-    CAMERA_SET_PARM_SCENE_MODE,
+    CAMERA_START_VIDEO,
+    CAMERA_STOP_VIDEO,
+    CAMERA_START_RECORDING,
+    CAMERA_STOP_RECORDING
 };
 
 typedef enum {
@@ -490,6 +488,7 @@ private:
     sp<PmemPool> mDisplayHeap;
     sp<AshmemPool> mJpegHeap;
     sp<PmemPool> mRawSnapShotPmemHeap;
+    sp<AshmemPool> mRawSnapshotAshmemHeap;
     sp<PmemPool> mPostViewHeap;
 
 

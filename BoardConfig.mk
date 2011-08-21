@@ -11,9 +11,6 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 
 #Kernel Panic Fix 
 ARCH_ARM_HAVE_ARMV7A_BUG := true
-WITH_JIT := true
-ENABLE_JSC_JIT := true
-JS_ENGINE := jsc
 
 BOARD_USES_GENERIC_AUDIO := false
 TARGET_PROVIDES_LIBAUDIO := true
@@ -30,7 +27,7 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
 #BOARD_USES_QCOM_LIBRPC := true
-#BOARD_USE_QCOM_PMEM := true
+BOARD_USE_QCOM_PMEM := true
 
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_AMSS_VERSION := 1240
@@ -39,11 +36,7 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 BOARD_EGL_CFG := device/semc/msm7x30-common/prebuilt/egl.cfg
 BOARD_NO_RGBX_8888 := true
-
-#no need for those when new kernel is awailable
-BOARD_USE_USB_MASS_STORAGE_SWITCH := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun
-TARGET_USE_CUSTOM_VIBRATOR_FILE_PATH := /sys/devices/platform/msm_pmic_vibrator/enable
+BOARD_USE_SCREENCAP := true
 
 BOARD_CUSTOM_BOOTIMG_MK := device/semc/es209ra/custombootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
@@ -51,9 +44,7 @@ TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
 BOARD_HAS_SMALL_RECOVERY := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_USES_RECOVERY_CHARGEMODE := false
-BOARD_HAS_NO_SELECT_BUTTON := true
-#BOARD_HDPI_RECOVERY := true
-
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/es209ra/recovery/recovery_ui.c
 
 BOARD_KERNEL_CMDLINE := console=null
 BOARD_KERNEL_BASE := 0x20000000
@@ -63,7 +54,6 @@ BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 # A custom ota package maker for a device without a boot partition
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/semc_ota_from_target_files
 
+BOARD_CAMERA_USE_GETBUFFERINFO := true
 
-# Vibrator
-BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/semc/es209ra/vibrator.c
-
+TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra

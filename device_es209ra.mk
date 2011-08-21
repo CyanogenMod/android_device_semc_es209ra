@@ -21,7 +21,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
 PRODUCT_PACKAGES += \
-    mount_system \
+    screencap \
     librs_jni \
     gralloc.es209ra \
     copybit.es209ra \
@@ -50,13 +50,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/init.es209ra.rc:root/init.es209ra.rc \
     device/semc/es209ra/prebuilt/init.bt.sh:system/etc/init.bt.sh \
+    device/semc/es209ra/prebuilt/DualMicControl.txt:system/etc/DualMicControl.txt \
     device/semc/es209ra/prebuilt/ueventd.es209ra.rc:root/ueventd.es209ra.rc \
     device/semc/es209ra/prebuilt/hw_config.sh:system/etc/hw_config.sh \
     device/semc/es209ra/prebuilt/bootrec:root/sbin/bootrec \
     device/semc/es209ra/recovery.fstab:root/recovery.fstab \
     device/semc/es209ra/prebuilt/vold.fstab:system/etc/vold.fstab \
     device/semc/es209ra/prebuilt/initlogo.rle:root/initlogo.rle 
-
     
 #xrecovery
 PRODUCT_COPY_FILES += \
@@ -98,14 +98,14 @@ PRODUCT_COPY_FILES += \
 
 #Offline charging animation
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_01.png:system/semc/chargemon/data/charging_animation_01.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_02.png:system/semc/chargemon/data/charging_animation_02.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_03.png:system/semc/chargemon/data/charging_animation_03.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_04.png:system/semc/chargemon/data/charging_animation_04.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_05.png:system/semc/chargemon/data/charging_animation_05.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_06.png:system/semc/chargemon/data/charging_animation_06.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_07.png:system/semc/chargemon/data/charging_animation_07.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_blank.png:system/semc/chargemon/data/charging_animation_blank.png
+    device/semc/msm7x30-common/prebuilt/animations/charging_animation_01_H.png:system/semc/chargemon/data/charging_animation_01.png \
+    device/semc/msm7x30-common/prebuilt/animations/charging_animation_02_H.png:system/semc/chargemon/data/charging_animation_02.png \
+    device/semc/msm7x30-common/prebuilt/animations/charging_animation_03_H.png:system/semc/chargemon/data/charging_animation_03.png \
+    device/semc/msm7x30-common/prebuilt/animations/charging_animation_04_H.png:system/semc/chargemon/data/charging_animation_04.png \
+    device/semc/msm7x30-common/prebuilt/animations/charging_animation_05_H.png:system/semc/chargemon/data/charging_animation_05.png \
+    device/semc/msm7x30-common/prebuilt/animations/charging_animation_06_H.png:system/semc/chargemon/data/charging_animation_06.png \
+    device/semc/msm7x30-common/prebuilt/animations/charging_animation_07_H.png:system/semc/chargemon/data/charging_animation_07.png \
+    device/semc/msm7x30-common/prebuilt/animations/charging_animation_blank_H.png:system/semc/chargemon/data/charging_animation_blank.png
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -132,6 +132,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.compcache.default=0 \
     ro.product.locale.language=en \
     ro.product.locale.region=US \
+    persist.ro.ril.sms_sync_sending=1 \
+    persist.android.strictmode=0 \
+    ro.camera.hd_shrink_vf_enabled=1 \
     BUILD_UTC_DATE=0
 
 # es209ra uses high-density artwork where available
