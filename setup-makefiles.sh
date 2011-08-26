@@ -108,6 +108,7 @@ vendor/__VENDOR__/__DEVICE__/proprietary/libGLESv2_adreno200.so:system/lib/egl/l
 PRODUCT_COPY_FILES += \\
 vendor/__VENDOR__/__DEVICE__/proprietary/sensors.conf:system/etc/sensors.conf \\
 vendor/__VENDOR__/__DEVICE__/proprietary/sensors.default.so:system/lib/hw/sensors.es209ra.so \\
+vendor/__VENDOR__/__DEVICE__/proprietary/copybit.qsd8k.so:system/lib/hw/copybit.es209ra.so \\
 vendor/__VENDOR__/__DEVICE__/proprietary/akmd2:system/bin/akmd2 
 
 #offline charging animation

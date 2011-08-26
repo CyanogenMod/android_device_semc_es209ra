@@ -24,7 +24,6 @@ PRODUCT_PACKAGES += \
     screencap \
     librs_jni \
     gralloc.es209ra \
-    copybit.es209ra \
     gps.es209ra \
     lights.es209ra \
     libOmxCore \
@@ -33,6 +32,7 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     com.android.future.usb.accessory
 
+#    copybit.es209ra \
 
 #PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x8.map
 
@@ -67,7 +67,13 @@ PRODUCT_COPY_FILES += \
 
 #WIFI modules and configs
 PRODUCT_COPY_FILES += \
+    device/semc/es209ra/prebuilt/10dnsconf:system/etc/init.d/10dnsconf \
+    device/semc/es209ra/prebuilt/10regcode:system/etc/init.d/10regcode \
+    device/semc/es209ra/prebuilt/10hostapconf:system/etc/init.d/10hostapconf \
+    device/semc/es209ra/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
     device/semc/es209ra/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/semc/es209ra/prebuilt/hostapd:system/bin/hostapd \
+    device/semc/es209ra/prebuilt/reg_code:system/etc/wifi/reg_code \
     device/semc/es209ra/prebuilt/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
     device/semc/es209ra/modules/ar6000.ko:system/lib/modules/ar6000.ko 
 

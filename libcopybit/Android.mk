@@ -1,4 +1,3 @@
-#ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),es209ra)
 # Copyright (C) 2008 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +18,7 @@ LOCAL_PATH:= $(call my-dir)
 # hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.board.platform>.so
 
 
-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),es209ra)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),es209raa)
 include $(CLEAR_VARS)
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
@@ -31,4 +30,3 @@ LOCAL_C_INCLUDES += hardware/libhardware/modules/gralloc
 LOCAL_CFLAGS += -DCOPYBIT_QSD8K=1
 include $(BUILD_SHARED_LIBRARY)
 endif
-#endif

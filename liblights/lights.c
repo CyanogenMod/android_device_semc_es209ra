@@ -211,12 +211,21 @@ set_speaker_light_locked(struct light_device_t* dev,
     }
 
         if (blink) {
+        if (red>0) {
+            write_int(RED_LED_FILE, red);
             write_int(RED_LED_BLINK_ON, led_on);
-            write_int(GREEN_LED_BLINK_ON, led_on);
-            write_int(BLUE_LED_BLINK_ON, led_on);
             write_int(RED_LED_BLINK_OFF, led_off);
+            }
+         if (green>0) {
+            write_int(GREEN_LED_FILE, green);
+            write_int(GREEN_LED_BLINK_ON, led_on);
             write_int(GREEN_LED_BLINK_OFF, led_off);
+            }
+         if (blue>0) {
+            write_int(BLUE_LED_FILE, blue);
+            write_int(BLUE_LED_BLINK_ON, led_on);
             write_int(BLUE_LED_BLINK_OFF, led_off);
+            }
         }
 
     return 0;
