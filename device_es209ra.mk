@@ -125,7 +125,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=15 \
     ro.sf.lcd_density=240 \
     qemu.sf.lcd_density=240 \
-    ro.sf.hwrotation=180 \
     keyguard.no_require_sim=true \
     ro.com.google.locationfeatures=1 \
     dalvik.vm.dexopt-flags=m=y \

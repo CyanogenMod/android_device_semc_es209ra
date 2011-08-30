@@ -17,9 +17,9 @@ TARGET_PROVIDES_LIBAUDIO := true
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := AWEXT
-BOARD_WLAN_DEVICE           := wlan0
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/ar6000.ko"
-WIFI_DRIVER_MODULE_NAME     := "ar6000"
+WIFI_DRIVER_MODULE_PATH     := /system/lib/modules/ar6000.ko
+WIFI_DRIVER_MODULE_NAME     := ar6000
+#BOARD_WLAN_DEVICE           := wlan0
 
 BOARD_HAVE_BLUETOOTH := true
 
@@ -52,7 +52,7 @@ BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 # A custom ota package maker for a device without a boot partition
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/semc_ota_from_target_files
 
-BOARD_CAMERA_USE_GETBUFFERINFO := true
+#BOARD_CAMERA_USE_GETBUFFERINFO := true
 
 TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra
 
