@@ -82,11 +82,6 @@ vendor/__VENDOR__/__DEVICE__/proprietary/yamato_pfp.fw:system/etc/firmware/yamat
 vendor/__VENDOR__/__DEVICE__/proprietary/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw \\
 vendor/__VENDOR__/__DEVICE__/proprietary/camfirm.bin:system/etc/firmware/camfirm.bin \\
 
-## SE Sensors
-PRODUCT_COPY_FILES += \\
-vendor/__VENDOR__/__DEVICE__/proprietary/sensors.default.so:system/lib/hw/sensors.es209ra.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/copybit.qsd8k.so:system/lib/hw/copybit.es209ra.so
-
 ## ATHEROS WIFI & BT
 PRODUCT_COPY_FILES += \\
 vendor/__VENDOR__/__DEVICE__/proprietary/hciattach:system/bin/hciattach \\
@@ -94,7 +89,7 @@ vendor/__VENDOR__/__DEVICE__/proprietary/hci_qcomm_init:system/bin/hci_qcomm_ini
 vendor/__VENDOR__/__DEVICE__/proprietary/athwlan.bin.z77:system/lib/modules/athwlan.bin.z77 \\
 vendor/__VENDOR__/__DEVICE__/proprietary/data.patch.hw2_0.bin:system/lib/modules/data.patch.hw2_0.bin \\
 vendor/__VENDOR__/__DEVICE__/proprietary/wlan_mac:system/bin/wlan_mac \\
-vendor/__VENDOR__/__DEVICE__/proprietary/wlan_tool:system/bin/wlan_tool 
+vendor/__VENDOR__/__DEVICE__/proprietary/wlan_tool:system/bin/wlan_tool
 
 ## Adreno 200 files
 PRODUCT_COPY_FILES += \\
@@ -108,14 +103,14 @@ vendor/__VENDOR__/__DEVICE__/proprietary/libGLESv2_adreno200.so:system/lib/egl/l
 PRODUCT_COPY_FILES += \\
 vendor/__VENDOR__/__DEVICE__/proprietary/sensors.conf:system/etc/sensors.conf \\
 vendor/__VENDOR__/__DEVICE__/proprietary/sensors.default.so:system/lib/hw/sensors.es209ra.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/copybit.qsd8k.so:system/lib/hw/copybit.es209ra.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/akmd2:system/bin/akmd2 
+vendor/__VENDOR__/__DEVICE__/proprietary/akmd2:system/bin/akmd2
+#vendor/__VENDOR__/__DEVICE__/proprietary/copybit.qsd8k.so:system/lib/hw/copybit.es209ra.so \\
 
 #offline charging animation
 PRODUCT_COPY_FILES += \\
-vendor/__VENDOR__/__DEVICE__/proprietary/chargemon:system/bin/charger \\
+vendor/__VENDOR__/__DEVICE__/proprietary/chargemon:system/bin/chargemon \\
 vendor/__VENDOR__/__DEVICE__/proprietary/libmiscta.so:system/lib/libmiscta.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/updatemiscta:system/bin/updatemiscta 
+vendor/__VENDOR__/__DEVICE__/proprietary/updatemiscta:system/bin/updatemiscta
 
 
 EOF

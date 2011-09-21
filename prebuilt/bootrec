@@ -27,5 +27,7 @@ mount /dev/block/mmcblk0p1 /sdcard
 /sbin/adbd recovery 
 fi
 
+/system/bin/chargemon
+
 #continue booting
 

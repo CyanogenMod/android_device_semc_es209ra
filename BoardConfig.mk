@@ -19,7 +19,6 @@ TARGET_PROVIDES_LIBAUDIO := true
 BOARD_WPA_SUPPLICANT_DRIVER := AWEXT
 WIFI_DRIVER_MODULE_PATH     := /system/lib/modules/ar6000.ko
 WIFI_DRIVER_MODULE_NAME     := ar6000
-#BOARD_WLAN_DEVICE           := wlan0
 
 BOARD_HAVE_BLUETOOTH := true
 
@@ -34,6 +33,8 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 BOARD_EGL_CFG := device/semc/msm7x30-common/prebuilt/egl.cfg
 BOARD_NO_RGBX_8888 := true
+TARGET_USES_16BPPSURFACE_FOR_OPAQUE := true
+TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 BOARD_USE_SCREENCAP := true
 
 BOARD_CUSTOM_BOOTIMG_MK := device/semc/es209ra/custombootimg.mk
@@ -52,8 +53,9 @@ BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 # A custom ota package maker for a device without a boot partition
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/semc_ota_from_target_files
 
-#BOARD_CAMERA_USE_GETBUFFERINFO := true
-
 TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra
 
 WITH_DEXPREOPT := true
+
+BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun0/file

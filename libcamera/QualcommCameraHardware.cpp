@@ -23,8 +23,8 @@
 ** Please do not change the EXIF header without asking me first.
 */
 
-#define LOG_NDEBUG 0
-#define LOG_NIDEBUG 0
+#define LOG_NDEBUG 1
+#define LOG_NIDEBUG 1
 #define LOG_TAG "QualcommCameraHardware"
 #include <utils/Log.h>
 
@@ -247,6 +247,7 @@ static thumbnail_size_type thumbnail_sizes[] = {
 //    { 5006, 352, 288 }, //1.222222
     { 5461, 800, 600 }, //1.333333
     { 5461, 640, 480 }, //1.333333
+    { 5461, 320, 240 }, //1.333333
 
 };
 #define THUMBNAIL_SIZE_COUNT (sizeof(thumbnail_sizes)/sizeof(thumbnail_size_type))
@@ -1009,18 +1010,18 @@ void QualcommCameraHardware::initDefaultParameters()
     mDimension.display_width = DEFAULT_PREVIEW_WIDTH;
     mDimension.display_height = DEFAULT_PREVIEW_HEIGHT;
 
-    mParameters.setPreviewFrameRate(DEFAULT_FPS);
-    if((strcmp(mSensorInfo.name, "vx6953")) &&
-        (strcmp(mSensorInfo.name, "VX6953")) &&
-        (strcmp(sensorType->name, "2mp"))){
-        mParameters.set(
-            CameraParameters::KEY_SUPPORTED_PREVIEW_FRAME_RATES,
-            preview_frame_rate_values.string());
-    } else {
-        mParameters.set(
-            CameraParameters::KEY_SUPPORTED_PREVIEW_FRAME_RATES,
-            DEFAULT_FPS);
-    }
+//    mParameters.setPreviewFrameRate(DEFAULT_FPS);
+//    if((strcmp(mSensorInfo.name, "vx6953")) &&
+//        (strcmp(mSensorInfo.name, "VX6953")) &&
+//        (strcmp(sensorType->name, "2mp"))){
+//        mParameters.set(
+//            CameraParameters::KEY_SUPPORTED_PREVIEW_FRAME_RATES,
+//            preview_frame_rate_values.string());
+//    } else {
+//        mParameters.set(
+//            CameraParameters::KEY_SUPPORTED_PREVIEW_FRAME_RATES,
+//            DEFAULT_FPS);
+//    }
     mParameters.setPreviewFormat("yuv420sp"); // informative
 
     mParameters.setPictureSize(DEFAULT_PICTURE_WIDTH, DEFAULT_PICTURE_HEIGHT);
@@ -2361,12 +2362,9 @@ bool QualcommCameraHardware::initRaw(bool initJpegHeap)
     }
 
     // Snapshot
-    mRawSize = rawWidth * rawHeight * 3 / 2;
-
-    if( mCurrentTarget == TARGET_MSM7627 )
-             mJpegMaxSize = CEILING16(rawWidth) * CEILING16(rawHeight) * 3 / 2;
-    else
-             mJpegMaxSize = rawWidth * rawHeight * 3 / 2;
+    mRawSize = rawWidth * rawHeight;
+    mJpegMaxSize = rawWidth * rawHeight;
+    //* 3 / 2;
 
     LOGV("initRaw: initializing mRawHeap.");
     mRawHeap =
@@ -3330,7 +3328,7 @@ LOGE(" Error while doing MDP zoom ");
     }
     mInPreviewCallback = false;
 
- LOGV("receivePreviewFrame X");
+// LOGV("receivePreviewFrame X");
 }
 
 
@@ -3802,32 +3800,32 @@ status_t QualcommCameraHardware::setPreviewSize(const CameraParameters& params)
     return BAD_VALUE;
 }
 
-status_t QualcommCameraHardware::setPreviewFrameRate(const CameraParameters& params)
-{
-    if((!strcmp(mSensorInfo.name, "vx6953")) ||
-        (!strcmp(mSensorInfo.name, "VX6953")) ||
-        (!strcmp(sensorType->name, "2mp"))){
-        LOGI("set fps is not supported for this sensor");
-        return NO_ERROR;
-    }
-    uint16_t previousFps = (uint16_t)mParameters.getPreviewFrameRate();
-    uint16_t fps = (uint16_t)params.getPreviewFrameRate();
-    LOGV("requested preview frame rate is %u", fps);
-
-    if(mInitialized && (fps == previousFps)){
-        LOGV("fps same as previous fps");
-        return NO_ERROR;
-    }
-
-    if(MINIMUM_FPS <= fps && fps <=MAXIMUM_FPS){
-        mParameters.setPreviewFrameRate(fps);
-        bool ret = native_set_parm(CAMERA_SET_PARM_FPS,
-                sizeof(fps), (void *)&fps);
-        return ret ? NO_ERROR : UNKNOWN_ERROR;
-    }
-    return BAD_VALUE;
-
-}
+//status_t QualcommCameraHardware::setPreviewFrameRate(const CameraParameters& params)
+//{
+//    if((!strcmp(mSensorInfo.name, "vx6953")) ||
+//        (!strcmp(mSensorInfo.name, "VX6953")) ||
+//        (!strcmp(sensorType->name, "2mp"))){
+//        LOGI("set fps is not supported for this sensor");
+//        return NO_ERROR;
+//    }
+//    uint16_t previousFps = (uint16_t)mParameters.getPreviewFrameRate();
+//    uint16_t fps = (uint16_t)params.getPreviewFrameRate();
+//    LOGV("requested preview frame rate is %u", fps);
+//
+//    if(mInitialized && (fps == previousFps)){
+//        LOGV("fps same as previous fps");
+//        return NO_ERROR;
+//    }
+//
+//    if(MINIMUM_FPS <= fps && fps <=MAXIMUM_FPS){
+//        mParameters.setPreviewFrameRate(fps);
+//        bool ret = native_set_parm(CAMERA_SET_PARM_FPS,
+//                sizeof(fps), (void *)&fps);
+///        return ret ? NO_ERROR : UNKNOWN_ERROR;
+//    }
+//    return BAD_VALUE;
+//
+//}
 
 status_t QualcommCameraHardware::setPictureSize(const CameraParameters& params)
 {
@@ -3839,11 +3837,6 @@ status_t QualcommCameraHardware::setPictureSize(const CameraParameters& params)
     for (int i = 0; i < supportedPictureSizesCount; ++i) {
         if (width == picture_sizes_ptr[i].width
                 && height == picture_sizes_ptr[i].height) {
-            if (!strcmp(mSensorInfo.name, "ov5642")
-&& width == 2592) {
-/* WTF... The max this "5MPx" sensor supports is 4.75 */
-                width = 2560 ; height = 1920;
-            }
             mParameters.setPictureSize(width, height);
             mDimension.picture_width = width;
             mDimension.picture_height = height;
@@ -4022,7 +4015,7 @@ status_t QualcommCameraHardware::setBrightness(const CameraParameters& params) {
 
 //status_t QualcommCameraHardware::setExposureCompensation(const CameraParameters& params) {
 //        int expcomp = params.getInt("exposure-compensation");
-//
+
 //mParameters.set(CameraParameters::KEY_EXPOSURE_COMPENSATION, expcomp);
 //
 //        expcomp+=2;

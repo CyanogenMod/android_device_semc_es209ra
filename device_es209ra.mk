@@ -34,7 +34,7 @@ PRODUCT_PACKAGES += \
 
 #    copybit.es209ra \
 
-#PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x8.map
+PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x10.map
 
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
@@ -57,25 +57,20 @@ PRODUCT_COPY_FILES += \
     device/semc/es209ra/recovery.fstab:root/recovery.fstab \
     device/semc/es209ra/prebuilt/vold.fstab:system/etc/vold.fstab \
     device/semc/es209ra/prebuilt/initlogo.rle:root/initlogo.rle 
-    
-#xrecovery
-PRODUCT_COPY_FILES += \
-    device/semc/es209ra/prebuilt/chargemon:system/bin/chargemon \
-    device/semc/es209ra/prebuilt/miniloader:system/kernel/miniloader \
-    device/semc/es209ra/prebuilt/splboot.ko:system/kernel/splboot.ko \
-    device/semc/es209ra/prebuilt/sh:system/xbin/sh
+
 
 #WIFI modules and configs
 PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/10dnsconf:system/etc/init.d/10dnsconf \
     device/semc/es209ra/prebuilt/10regcode:system/etc/init.d/10regcode \
+    device/semc/es209ra/prebuilt/10cpmodules:system/etc/init.d/10cpmodules \
     device/semc/es209ra/prebuilt/10hostapconf:system/etc/init.d/10hostapconf \
     device/semc/es209ra/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
     device/semc/es209ra/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/semc/es209ra/prebuilt/hostapd:system/bin/hostapd \
     device/semc/es209ra/prebuilt/reg_code:system/etc/wifi/reg_code \
     device/semc/es209ra/prebuilt/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
-    device/semc/es209ra/modules/ar6000.ko:system/lib/modules/ar6000.ko 
+    device/semc/es209ra/modules/ar6000.ko:root/modules/ar6000.ko
 
 #recovery resources
 PRODUCT_COPY_FILES += \
@@ -139,8 +134,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.locale.region=US \
     persist.ro.ril.sms_sync_sending=1 \
     persist.android.strictmode=0 \
-    ro.camera.hd_shrink_vf_enabled=1 \
     BUILD_UTC_DATE=0
+#    ro.camera.hd_shrink_vf_enabled=1 \
 
 # es209ra uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
