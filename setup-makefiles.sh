@@ -72,9 +72,9 @@ vendor/__VENDOR__/__DEVICE__/proprietary/libwmsts.so:system/lib/libwmsts.so
 PRODUCT_COPY_FILES += \\
 vendor/__VENDOR__/__DEVICE__/proprietary/liboemcamera.so:system/lib/liboemcamera.so \\
 vendor/__VENDOR__/__DEVICE__/proprietary/libmmjpeg.so:system/lib/libmmjpeg.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/libmmipl.so:system/lib/libmmipl.so
-#vendor/__VENDOR__/__DEVICE__/proprietary/libcamera.so:obj/lib/libcamera.so \\
-#vendor/__VENDOR__/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so \\
+vendor/__VENDOR__/__DEVICE__/proprietary/libmmipl.so:system/lib/libmmipl.so \\
+vendor/__VENDOR__/__DEVICE__/proprietary/libcamera.so:obj/lib/libcamera.so \\
+vendor/__VENDOR__/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so
 
 ## FIRMWARE
 PRODUCT_COPY_FILES += \\
@@ -104,12 +104,12 @@ PRODUCT_COPY_FILES += \\
 vendor/__VENDOR__/__DEVICE__/proprietary/sensors.conf:system/etc/sensors.conf \\
 vendor/__VENDOR__/__DEVICE__/proprietary/sensors.default.so:system/lib/hw/sensors.es209ra.so \\
 vendor/__VENDOR__/__DEVICE__/proprietary/akmd2:system/bin/akmd2
-#vendor/__VENDOR__/__DEVICE__/proprietary/copybit.qsd8k.so:system/lib/hw/copybit.es209ra.so \\
 
 #offline charging animation
 PRODUCT_COPY_FILES += \\
 vendor/__VENDOR__/__DEVICE__/proprietary/chargemon:system/bin/chargemon \\
 vendor/__VENDOR__/__DEVICE__/proprietary/libmiscta.so:system/lib/libmiscta.so \\
+vendor/__VENDOR__/__DEVICE__/proprietary/libOmxVdec.so:system/lib/libOmxVdec.so \\
 vendor/__VENDOR__/__DEVICE__/proprietary/updatemiscta:system/bin/updatemiscta
 
 

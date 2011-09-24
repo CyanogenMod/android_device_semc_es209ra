@@ -34,7 +34,7 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 BOARD_EGL_CFG := device/semc/msm7x30-common/prebuilt/egl.cfg
 BOARD_NO_RGBX_8888 := true
 TARGET_USES_16BPPSURFACE_FOR_OPAQUE := true
-TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+#TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 BOARD_USE_SCREENCAP := true
 
 BOARD_CUSTOM_BOOTIMG_MK := device/semc/es209ra/custombootimg.mk
@@ -57,5 +57,8 @@ TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra
 
 WITH_DEXPREOPT := true
 
-BOARD_USE_USB_MASS_STORAGE_SWITCH := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun0/file
+BOARD_CAMERA_USE_GETBUFFERINFO := true
+
+
+#BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun0/file

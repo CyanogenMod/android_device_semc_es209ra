@@ -24,6 +24,7 @@ PRODUCT_PACKAGES += \
     screencap \
     librs_jni \
     gralloc.es209ra \
+    copybit.es209ra \
     gps.es209ra \
     lights.es209ra \
     libOmxCore \
@@ -32,14 +33,17 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     com.android.future.usb.accessory
 
-#    copybit.es209ra \
 
-PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x10.map
+#PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x10.map
 
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
 DEVICE_PACKAGE_OVERLAYS += device/semc/es209ra/overlay
+
+# kernel.sin prebuilt for now
+PRODUCT_COPY_FILES += \
+    device/semc/es209ra/prebuilt/kernel.sin:system/kernel.sin
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \

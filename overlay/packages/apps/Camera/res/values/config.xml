@@ -27,20 +27,5 @@
 	<!-- FFC parameter filtering -->
 	<bool name="ffc_canFocus">true</bool>
 	<bool name="ffc_canZoom">false</bool>
-	<string name="ffc_supportedEffects"></string>
 
-	<!-- Resolution filtering -->
-	<string name="filtered_pictureSizes"></string>
-
-	<!-- High Framerate 1080p for Nvidia Cameras -->
-	<bool name="supportsNvHighBitrateFullHD">false</bool>
-
-	<!-- Samsung Camcorder Mode -->
-	<bool name="needsSamsungCamMode">false</bool>
-
-	<!-- Samsung Continuous Autofocus -->
-	<bool name="needsSamsungContinuousAf">false</bool>
-
-	<!-- Samsung Special Settings -->
-	<bool name="needsSamsungSpecialSettings">false</bool>
 </resources>
