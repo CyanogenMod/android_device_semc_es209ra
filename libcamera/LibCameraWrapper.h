@@ -20,8 +20,8 @@ public:
     virtual bool        msgTypeEnabled(int32_t msgType);
 
     virtual status_t    startPreview();
-//    virtual bool        useOverlay();
-//    virtual status_t    setOverlay(const sp<Overlay> &overlay);
+    virtual bool        useOverlay();
+    virtual status_t    setOverlay(const sp<Overlay> &overlay);
     virtual void        stopPreview();
     virtual bool        previewEnabled();
 
