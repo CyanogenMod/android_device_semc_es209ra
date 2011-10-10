@@ -31,8 +31,8 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVidEnc \
     libmm-omxcore \
-    com.android.future.usb.accessory
-
+    com.android.future.usb.accessory \
+    rzscontrol
 
 #PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x10.map
 
@@ -139,9 +139,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.locale.language=en \
     ro.product.locale.region=US \
     persist.ro.ril.sms_sync_sending=1 \
+    ro.camera.hd_shrink_vf_enabled=1 \
     persist.android.strictmode=0 \
     BUILD_UTC_DATE=0
-#    ro.camera.hd_shrink_vf_enabled=1 \
 
 # es209ra uses high-density artwork where available
 PRODUCT_LOCALES += hdpi

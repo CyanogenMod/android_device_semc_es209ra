@@ -103,15 +103,19 @@ vendor/__VENDOR__/__DEVICE__/proprietary/libGLESv2_adreno200.so:system/lib/egl/l
 PRODUCT_COPY_FILES += \\
 vendor/__VENDOR__/__DEVICE__/proprietary/sensors.conf:system/etc/sensors.conf \\
 vendor/__VENDOR__/__DEVICE__/proprietary/sensors.default.so:system/lib/hw/sensors.es209ra.so \\
+vendor/__VENDOR__/__DEVICE__/proprietary/gralloc.es209ra.so:system/lib/hw/gralloc.es209ra.so \\
 vendor/__VENDOR__/__DEVICE__/proprietary/akmd2:system/bin/akmd2
 
 #offline charging animation
 PRODUCT_COPY_FILES += \\
 vendor/__VENDOR__/__DEVICE__/proprietary/chargemon:system/bin/chargemon \\
 vendor/__VENDOR__/__DEVICE__/proprietary/libmiscta.so:system/lib/libmiscta.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/libOmxVdec.so:system/lib/libOmxVdec.so \\
 vendor/__VENDOR__/__DEVICE__/proprietary/updatemiscta:system/bin/updatemiscta
 
+#OMX
+PRODUCT_COPY_FILES += \\
+vendor/__VENDOR__/__DEVICE__/proprietary/libOmxVdec.so:system/lib/libOmxVdec.so \\
+vendor/__VENDOR__/__DEVICE__/proprietary/libstagefrighthw.so:system/lib/libstagefrighthw.so
 
 EOF
 

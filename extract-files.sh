@@ -92,6 +92,11 @@ adb pull /system/lib/libmiscta.so ../../../vendor/$VENDOR/$DEVICE/proprietary
 #hw
 adb pull /system/lib/hw/copybit.qsd8k.so ../../../vendor/$VENDOR/$DEVICE/proprietary
 adb pull /system/lib/hw/sensors.default.so ../../../vendor/$VENDOR/$DEVICE/proprietary
+adb pull /system/lib/hw/gralloc.es209ra.so ../../../vendor/$VENDOR/$DEVICE/proprietary
+
+OMX
+adb pull /system/lib/hw/libOmxVdec.so ../../../vendor/$VENDOR/$DEVICE/proprietary
+adb pull /system/lib/hw/libstagefrighthw.so ../../../vendor/$VENDOR/$DEVICE/proprietary
 
 ./setup-makefiles.sh
 

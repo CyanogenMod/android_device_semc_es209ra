@@ -19,6 +19,7 @@ public:
     virtual void        disableMsgType(int32_t msgType);
     virtual bool        msgTypeEnabled(int32_t msgType);
 
+    virtual status_t    getBufferInfo(sp<IMemory>& Frame, size_t *alignedSize);
     virtual status_t    startPreview();
     virtual bool        useOverlay();
     virtual status_t    setOverlay(const sp<Overlay> &overlay);
@@ -37,27 +38,35 @@ public:
     virtual status_t    dump(int fd, const Vector<String16> &args) const;
     virtual status_t    setParameters(const CameraParameters& params);
     virtual CameraParameters  getParameters() const;
-    virtual status_t    sendCommand(int32_t command, int32_t arg1,
-                                    int32_t arg2);
+    virtual status_t    sendCommand(int32_t command, int32_t arg1, int32_t arg2);
     virtual void        release();
-    virtual status_t    getBufferInfo(sp<IMemory>& Frame, size_t *alignedSize);
 
     static    sp<CameraHardwareInterface> createInstance(int cameraId);
 
 private:
-            LibCameraWrapper(int CameraId);
+    typedef enum {
+        CAM_SOC
+    } CameraType;
+
+    LibCameraWrapper(sp<CameraHardwareInterface>& libInterface, CameraType type);
     virtual ~LibCameraWrapper();
 
-    sp<CameraHardwareInterface> mLibInterface;
-    int mCameraId;
-//    bool mVideoMode;
-//    bool mContinuousAf;
-//    bool mFixFocus;
-//    bool mTouchFocus;
-//    int mTouchFocusX;
-//    int mTouchFocusY;
+    static void notifyCb(int32_t msgType, int32_t ext1, int32_t ext2, void* user);
+    static void dataCb(int32_t msgType, const sp<IMemory>& dataPtr, void* user);
+    static void dataCbTimestamp(nsecs_t timestamp, int32_t msgType, const sp<IMemory>& dataPtr, void* user);
+    void fixUpBrokenGpsLatitudeRef(const sp<IMemory>& dataPtr);
 
-    static wp<CameraHardwareInterface> singleton[2];
+    sp<CameraHardwareInterface> mLibInterface;
+    CameraType mCameraType;
+    bool mVideoMode;
+    String8 mLastFlashMode;
+
+    notify_callback mNotifyCb;
+    data_callback mDataCb;
+    data_callback_timestamp mDataCbTimestamp;
+    void *mCbUserData;
+
+    static wp<CameraHardwareInterface> singleton;
 
 };
 

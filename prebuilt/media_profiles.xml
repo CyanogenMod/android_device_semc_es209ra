@@ -92,8 +92,8 @@
                    channels="1" />
         </EncoderProfile>
 
-        <EncoderProfile quality="low" fileFormat="3gp" duration="30">
-            <Video codec="h263"
+        <EncoderProfile quality="low" fileFormat="mp4" duration="30">
+            <Video codec="h264"
                    bitRate="256000"
                    width="640"
                    height="480"
