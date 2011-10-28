@@ -1,77 +1,77 @@
 # Prebuilt kl keymaps
-/system/usr/keylayout/es209ra_keypad.kl
-/system/usr/keylayout/es209ra_handset.kl
-/system/usr/keychars/es209ra_keypad.kcm.bin
+usr/keylayout/es209ra_keypad.kl
+usr/keylayout/es209ra_handset.kl
+usr/keychars/es209ra_keypad.kcm.bin
 
 ## RIL related stuff 
-/system/lib/libril.so
-/system/bin/port-bridge
-/system/bin/qmuxd
-/system/lib/libauth.so
-/system/lib/libcm.so
-/system/lib/libdiag.so
-/system/lib/libdll.so
-/system/lib/libdsm.so
-/system/lib/libdss.so
-/system/lib/libgsdi_exp.so
-/system/lib/libgstk_exp.so
-/system/lib/libmmgsdilib.so
-/system/lib/libnv.so
-/system/lib/liboem_rapi.so
-/system/lib/liboncrpc.so
-/system/lib/libpbmlib.so
-/system/lib/libqmi.so
-/system/lib/libqueue.so
-/system/lib/libuim.so
-/system/lib/libril-qc-1.so
-/system/lib/libwms.so
-/system/lib/libwmsts.so
+lib/libril.so
+bin/port-bridge
+bin/qmuxd
+lib/libauth.so
+lib/libcm.so
+lib/libdiag.so
+lib/libdll.so
+lib/libdsm.so
+lib/libdss.so
+lib/libgsdi_exp.so
+lib/libgstk_exp.so
+lib/libmmgsdilib.so
+lib/libnv.so
+lib/liboem_rapi.so
+lib/liboncrpc.so
+lib/libpbmlib.so
+lib/libqmi.so
+lib/libqueue.so
+lib/libuim.so
+lib/libril-qc-1.so
+lib/libwms.so
+lib/libwmsts.so
 
 ## Camera proprietaries
-/system/lib/liboemcamera.so
-/system/lib/libmmjpeg.so
-/system/lib/libmmipl.so 
-/system/lib/libcamera.so
-/system/lib/libopencore_common.so
+lib/liboemcamera.so
+lib/libmmjpeg.so
+lib/libmmipl.so 
+lib/libcamera.so
+lib/libopencore_common.so
 
 
 ## FIRMWARE
-/system/etc/firmware/yamato_pfp.fw
-/system/etc/firmware/yamato_pm4.fw
-/system/etc/firmware/camfirm.bin
+etc/firmware/yamato_pfp.fw
+etc/firmware/yamato_pm4.fw
+etc/firmware/camfirm.bin
 
 ## ATHEROS WIFI 
-/system/lib/modules/athwlan.bin.z77
-/system/lib/modules/data.patch.hw2_0.bin
-/system/bin/wlan_mac
-/system/bin/wlan_tool
+lib/modules/athwlan.bin.z77
+lib/modules/data.patch.hw2_0.bin
+bin/wlan_mac
+bin/wlan_tool
 
 ## BT proprietary
-/system/bin/hci_qcomm_init
-/system/bin/hciattach
+bin/hci_qcomm_init
+bin/hciattach
 
 ## Adreno 200 files
-/system/lib/libgsl.so/libgsl.so
-/system/lib/egl/libGLESv1_CM_adreno200.so
-/system/lib/egl/libq3dtools_adreno200.so
-/system/lib/egl/libEGL_adreno200.so
-/system/lib/egl/libGLESv2_adreno200.so
+lib/libgsl.so
+lib/egl/libGLESv1_CM_adreno200.so
+lib/egl/libq3dtools_adreno200.so
+lib/egl/libEGL_adreno200.so
+lib/egl/libGLESv2_adreno200.so
 
 ## Other libraries and proprietary binaries
-/system/etc/vold.fstab
-/system/etc/sensors.conf
-/system/bin/akmd2
+etc/vold.fstab
+etc/sensors.conf
+bin/akmd2
 
 #offline charger
-/system/bin/chargemon
-/system/bin/updatemiscta
-/system/lib/libmiscta.so
+bin/chargemon
+bin/updatemiscta
+lib/libmiscta.so
 
 #hw
-/system/lib/hw/copybit.qsd8k.so
-/system/lib/hw/sensors.default.so
-/system/lib/hw/gralloc.es209ra.so
+lib/hw/copybit.qsd8k.so
+lib/hw/sensors.default.so
+lib/hw/gralloc.es209ra.so
 
-OMX
-/system/lib/hw/libOmxVdec.so
-/system/lib/hw/libstagefrighthw.so
+#OMX
+lib/libOmxVdec.so
+lib/libstagefrighthw.so
