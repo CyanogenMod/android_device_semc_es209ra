@@ -1,3 +1,5 @@
+-include vendor/semc/es209ra/BoardConfigVendor.mk
+
 TARGET_BOOTLOADER_BOARD_NAME := es209ra
 TARGET_SPECIFIC_HEADER_PATH := device/semc/es209ra/include
 
@@ -51,6 +53,5 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/se
 
 TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra
 
-WITH_DEXPREOPT := true
-
 BOARD_CAMERA_USE_GETBUFFERINFO := true
+
