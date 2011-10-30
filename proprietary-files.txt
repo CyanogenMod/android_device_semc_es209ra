@@ -31,7 +31,7 @@ lib/libwmsts.so
 lib/liboemcamera.so
 lib/libmmjpeg.so
 lib/libmmipl.so 
-lib/libcamera.so
+lib/libcamerasemc.so
 lib/libopencore_common.so
 
 
