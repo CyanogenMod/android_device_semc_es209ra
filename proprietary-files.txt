@@ -7,6 +7,7 @@ usr/keychars/es209ra_keypad.kcm.bin
 lib/libril.so
 bin/port-bridge
 bin/qmuxd
+bin/netd
 lib/libauth.so
 lib/libcm.so
 lib/libdiag.so
