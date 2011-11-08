@@ -140,6 +140,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.android.strictmode=0 \
     BUILD_UTC_DATE=0
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.tethering.kb_disconnect=1
+
 # es209ra uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
 
