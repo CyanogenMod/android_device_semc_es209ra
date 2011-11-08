@@ -41,10 +41,6 @@ PRODUCT_PACKAGES += \
 # application settings that are stored in resourced.
 DEVICE_PACKAGE_OVERLAYS += device/semc/es209ra/overlay
 
-# kernel.sin prebuilt for now
-PRODUCT_COPY_FILES += \
-    device/semc/es209ra/prebuilt/kernel.sin:system/kernel.sin
-
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
 	device/semc/es209ra/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
