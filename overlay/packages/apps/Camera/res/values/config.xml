@@ -28,4 +28,8 @@
 	<bool name="ffc_canFocus">true</bool>
 	<bool name="ffc_canZoom">false</bool>
 
-</resources>
+   <string-array name="pref_camera_flashmode_entryvalues" translatable="false">
+        <item>auto</item>
+        <item>torch</item>
+        <item>off</item>
+    </string-array></resources>

@@ -144,7 +144,8 @@ LibCameraWrapper::LibCameraWrapper(sp<CameraHardwareInterface>& libInterface, Ca
 LibCameraWrapper::~LibCameraWrapper()
 {
     if (mLastFlashMode == CameraParameters::FLASH_MODE_ON ||
-        mLastFlashMode == CameraParameters::FLASH_MODE_TORCH)
+        mLastFlashMode == CameraParameters::FLASH_MODE_TORCH ||
+        mLastFlashMode == CameraParameters::FLASH_MODE_AUTO)
     {
         setSocTorchMode(false);
     }
@@ -328,6 +329,7 @@ LibCameraWrapper::setParameters(const CameraParameters& params)
             if (mLastFlashMode != flashMode) {
                 bool shouldBeOn = strcmp(flashMode, CameraParameters::FLASH_MODE_TORCH) == 0 ||
                                   strcmp(flashMode, CameraParameters::FLASH_MODE_ON) == 0;
+                                  strcmp(flashMode, CameraParameters::FLASH_MODE_AUTO) == 0;
                 setSocTorchMode(shouldBeOn);
             }
             mLastFlashMode = flashMode;
@@ -347,7 +349,7 @@ LibCameraWrapper::getParameters() const
         // This is for detecting if we're in camcorder mode or not
         ret.set("cam-mode", mVideoMode ? "1" : "0");
 
-        ret.set("flash-mode-values", "off,on");
+        ret.set("flash-mode-values", "off,torch");
 
         // FFC: We need more preview and picture size to support GTalk
         ret.set("preview-size-values", "320x240,640x480,1280x720");
