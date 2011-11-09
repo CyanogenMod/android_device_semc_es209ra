@@ -71,8 +71,8 @@ bin/updatemiscta
 lib/libmiscta.so
 
 #hw
-lib/hw/copybit.qsd8k.so
-lib/hw/sensors.default.so
+lib/hw/copybit.es209ra.so
+lib/hw/sensors.es209ra.so
 lib/hw/gralloc.es209ra.so
 
 #OMX
