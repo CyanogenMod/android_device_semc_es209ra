@@ -46,6 +46,8 @@ lib/modules/athwlan.bin.z77
 lib/modules/data.patch.hw2_0.bin
 bin/wlan_mac
 bin/wlan_tool
+bin/hostapd
+etc/wifi/hostapd.conf
 
 ## BT proprietary
 bin/hci_qcomm_init

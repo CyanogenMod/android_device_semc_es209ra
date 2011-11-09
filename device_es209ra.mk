@@ -67,9 +67,7 @@ PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/10hostapconf:system/etc/init.d/10hostapconf \
     device/semc/es209ra/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
     device/semc/es209ra/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/semc/es209ra/prebuilt/hostapd:system/bin/hostapd \
     device/semc/es209ra/prebuilt/reg_code:system/etc/wifi/reg_code \
-    device/semc/es209ra/prebuilt/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
     device/semc/es209ra/modules/ar6000.ko:root/modules/ar6000.ko
 
 #recovery resources
