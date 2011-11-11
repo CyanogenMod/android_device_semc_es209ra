@@ -61,7 +61,6 @@ lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 
 ## Other libraries and proprietary binaries
-etc/vold.fstab
 etc/sensors.conf
 bin/akmd2
 
