@@ -1,26 +1,39 @@
 on early-boot
     exec /sbin/bootrec
 
+on fs
+    # mount mtd partitions
+    # Mount /system rw first to give the filesystem a chance to save a checkpoint
+    mount yaffs2 mtd@system /system
+    mount yaffs2 mtd@system /system ro remount
+    mount yaffs2 mtd@userdata /data nosuid nodev
+    mount yaffs2 mtd@cache /cache nosuid nodev
+
+on early-init
+    export EXTERNAL_STORAGE /mnt/sdcard
+    mkdir /mnt/sdcard 0000 system system
+    # for backwards compatibility
+    symlink /mnt/sdcard /sdcard
+
 on boot
     #rild
-    mkdir		/data/radio
-    chown radio radio	/data/radio
-    #wlan stuff
-    mkdir               /data/misc/dhcp 0770 dhcp system
+    mkdir               /data/radio
+    chown radio radio   /data/radio
+    mkdir               /data/misc/dhcp
+    chmod 0770          /data/misc/dhcp
     chown dhcp system   /data/misc/dhcp
     mkdir               /data/system 0770 system system
     chmod 0770          /data/system
     chown system system /data/system
-    mkdir               /data/system/wpa_supplicant 0770 wifi wifi
+    mkdir               /data/system/wpa_supplicant
     chmod 0771          /data/system/wpa_supplicant
     chown wifi wifi     /data/system/wpa_supplicant
-    mkdir               /data/misc/wifi 0770 wifi wifi
-    chmod 0770          /data/misc/wifi
+    mkdir               /data/misc/wifi
+    chmod 0777          /data/misc/wifi
     chown wifi wifi     /data/misc/wifi
     mkdir               /data/misc/wifi/sockets 0770 wifi wifi
-    chmod 0660          /data/misc/wifi/wpa_supplicant.conf
+    chmod 0666          /data/misc/wifi/wpa_supplicant.conf
     chown wifi wifi     /data/misc/wifi/wpa_supplicant.conf
-    #end of wlan dirs
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -60,35 +73,44 @@ on boot
     #allow setting polling rate on bma150
     chown system system /sys/devices/platform/i2c-adapter/i2c-0/0-0038/rate
 
+    #wifi load
+    insmod /modules/ar6000.ko
+
+    class_start default
 
 # Enable MASS storage on SDCARD
     write /sys/devices/platform/mass_storage/lun0/file /dev/block/mmcblk0p1
-    write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 1   
-    write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.4/polling 1  
+    write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 1
+    write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.4/polling 1
+
 
 on property:init.svc.bluetoothd=running
     write /sys/devices/virtual/bluetooth/hci0/link_supervision_timeout 6400
 
 service hci_qcomm_init /system/bin/log -t qcom-bluetooth -p i "hci_qcomm_init service requested"
+    class main
     user bluetooth
     group bluetooth net_bt_admin
     disabled
     oneshot
 
 service wlan_mac /system/bin/wlan_mac
+    class main
     user root
     oneshot
 
 service qmuxd /system/bin/qmuxd &
+    class main
 
 service hciattach /system/bin/sh /system/etc/init.bt.sh
+    class main
     user root
-    # Qcom added "sdcard_rw" at 3180Y
     group qcom_oncrpc bluetooth net_bt_admin system sdcard_rw
     disabled
     oneshot
 
 service hcid /system/bin/hcid -s -n -f /etc/bluez/hcid.conf
+    class main
     socket bluetooth stream 660 bluetooth bluetooth
     socket dbus_bluetooth stream 660 bluetooth bluetooth
     # init.rc does not yet support applying capabilities, so run as root and
@@ -96,40 +118,55 @@ service hcid /system/bin/hcid -s -n -f /etc/bluez/hcid.conf
     group bluetooth net_bt_admin misc
     disabled
 
-service dbus_bt /system/bin/sh /etc/dbus_bt/dbus_bt.sh
-    user bluetooth
-    group bluetooth net_bt_admin system sdcard_rw
-    disabled
-    oneshot
-
 service akmd2 /system/bin/akmd2
+    class main
     user compass
     group compass misc input system
 
 service hw_config /system/bin/sh /etc/hw_config.sh
+    class main
     user root
     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dawext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf
+service wpa_supplicant /system/bin/wpa_supplicant -Dawext -iwlan0
+    class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
 
-service hostapd /system/bin/logwrapper /system/bin/hostapd /data/misc/wifi/hostapd.conf
-    socket wl0.1 dgram 660 root wifi
-    user root
-    group wifi
-    oneshot
+service hostapd /system/bin/logwrapper /system/bin/hostapd -dd /data/misc/wifi/hostapd.conf
+    class main
+    socket wpa_wlan1 dgram 660 wifi wifi
     disabled
+    oneshot
 
-service dhcp-service /system/bin/netcfg eth0 dhcp
-	oneshot
+service dhcpcd_wlan0 /system/bin/dhcpcd -B -t 30
+    class main
+    disabled
+    oneshot
 
-on property:dev.bootcomplete=1
-	stop dhcp-service
-	start dhcp-service
+service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+    class main
+    disabled
+    oneshot
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -B wlan0
+service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service iprenew_p2p /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service iprenew_bnep0 /system/bin/dhcpcd -n
+    class main
     disabled
     oneshot
 

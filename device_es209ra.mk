@@ -6,9 +6,9 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 $(call inherit-product-if-exists, vendor/semc/es209ra/es209ra-vendor.mk)
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := X10i
+PRODUCT_NAME := es209ra
 PRODUCT_DEVICE := es209ra
-PRODUCT_MODEL := X10i
+PRODUCT_MODEL := es209ra
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
@@ -21,18 +21,23 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
 PRODUCT_PACKAGES += \
+    audio_policy.es209ra \
+    audio.primary.es209ra \
     screencap \
+    hwcomposer.qsd8k \
+    libgenlock \
     librs_jni \
     gralloc.es209ra \
-    copybit.es209ra \
+    copybit.qsd8k \
     gps.es209ra \
     lights.es209ra \
     libOmxCore \
     libOmxVdec \
     libOmxVidEnc \
+    wlan_tool \
+    wlan_mac \
     libmm-omxcore \
-    com.android.future.usb.accessory \
-    rzscontrol
+    com.android.future.usb.accessory
 
 #PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x10.map
 
@@ -43,8 +48,8 @@ DEVICE_PACKAGE_OVERLAYS += device/semc/es209ra/overlay
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
-	device/semc/es209ra/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
-	device/semc/es209ra/prebuilt/gps.conf:system/etc/gps.conf 
+    device/semc/es209ra/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
+    device/semc/es209ra/prebuilt/gps.conf:system/etc/gps.conf 
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -56,19 +61,18 @@ PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/bootrec:root/sbin/bootrec \
     device/semc/es209ra/recovery.fstab:root/recovery.fstab \
     device/semc/es209ra/prebuilt/vold.fstab:system/etc/vold.fstab \
-    device/semc/es209ra/prebuilt/initlogo.rle:root/initlogo.rle 
+    device/semc/es209ra/prebuilt/initlogo.rle:root/initlogo.rle
 
 
 #WIFI modules and configs
 PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/10dnsconf:system/etc/init.d/10dnsconf \
     device/semc/es209ra/prebuilt/10regcode:system/etc/init.d/10regcode \
-    device/semc/es209ra/prebuilt/10cpmodules:system/etc/init.d/10cpmodules \
     device/semc/es209ra/prebuilt/10hostapconf:system/etc/init.d/10hostapconf \
-    device/semc/es209ra/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
     device/semc/es209ra/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/semc/es209ra/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
     device/semc/es209ra/prebuilt/reg_code:system/etc/wifi/reg_code \
-    device/semc/es209ra/modules/ar6000.ko:root/modules/ar6000.ko
+    device/semc/es209ra/prebuilt/ar6000.ko:root/modules/ar6000.ko
 
 #recovery resources
 PRODUCT_COPY_FILES += \
@@ -77,12 +81,19 @@ PRODUCT_COPY_FILES += \
     bootable/recovery/res/images/icon_clockwork.png:root/res/images/icon_clockwork.png \
     bootable/recovery/res/images/icon_error.png:root/res/images/icon_error.png \
     bootable/recovery/res/images/icon_installing.png:root/res/images/icon_installing.png \
-    bootable/recovery/res/images/indeterminate1.png:root/res/images/indeterminate1.png \
-    bootable/recovery/res/images/indeterminate2.png:root/res/images/indeterminate2.png \
-    bootable/recovery/res/images/indeterminate3.png:root/res/images/indeterminate3.png \
-    bootable/recovery/res/images/indeterminate4.png:root/res/images/indeterminate4.png \
-    bootable/recovery/res/images/indeterminate5.png:root/res/images/indeterminate5.png \
-    bootable/recovery/res/images/indeterminate6.png:root/res/images/indeterminate6.png \
+    bootable/recovery/res/images/icon_installing_overlay01.png:root/res/images/icon_installing_overlay01.png \
+    bootable/recovery/res/images/icon_installing_overlay02.png:root/res/images/icon_installing_overlay02.png \
+    bootable/recovery/res/images/icon_installing_overlay03.png:root/res/images/icon_installing_overlay03.png \
+    bootable/recovery/res/images/icon_installing_overlay04.png:root/res/images/icon_installing_overlay04.png \
+    bootable/recovery/res/images/icon_installing_overlay05.png:root/res/images/icon_installing_overlay05.png \
+    bootable/recovery/res/images/icon_installing_overlay06.png:root/res/images/icon_installing_overlay06.png \
+    bootable/recovery/res/images/icon_installing_overlay07.png:root/res/images/icon_installing_overlay07.png \
+    bootable/recovery/res/images/indeterminate01.png:root/res/images/indeterminate01.png \
+    bootable/recovery/res/images/indeterminate02.png:root/res/images/indeterminate02.png \
+    bootable/recovery/res/images/indeterminate03.png:root/res/images/indeterminate03.png \
+    bootable/recovery/res/images/indeterminate04.png:root/res/images/indeterminate04.png \
+    bootable/recovery/res/images/indeterminate05.png:root/res/images/indeterminate05.png \
+    bootable/recovery/res/images/indeterminate06.png:root/res/images/indeterminate06.png \
     bootable/recovery/res/images/progress_empty.png:root/res/images/progress_empty.png \
     bootable/recovery/res/images/progress_fill.png:root/res/images/progress_fill.png
 
@@ -123,6 +134,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qemu.sf.lcd_density=240 \
     keyguard.no_require_sim=true \
     ro.com.google.locationfeatures=1 \
+    ro.telephony.ril.v3=skipbrokendatacall,signalstrength,datacall
     dalvik.vm.dexopt-flags=m=y \
     dalvik.vm.heapsize=48m \
     dalvik.vm.dexopt-data-only=1 \
@@ -137,6 +149,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.hd_shrink_vf_enabled=1 \
     persist.android.strictmode=0 \
     BUILD_UTC_DATE=0
+
+#    ro.telephony.ril.v3=1\
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.tethering.kb_disconnect=1

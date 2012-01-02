@@ -72,7 +72,8 @@ static const uint32_t SND_DEVICE_SPEAKER_DUAL_MIC = 31;
 static const uint32_t SND_DEVICE_HEADSET_AND_SPEAKER_BACK_MIC = 30;
 static uint32_t MIKE_ID_SPKR = 0x2B;
 static uint32_t MIKE_ID_HANDSET = 0x2C;
-namespace android {
+
+namespace android_audio_legacy {
 static int old_pathid = -1;
 static int new_pathid = -1;
 static int curr_out_device[2] = {-1,-1};
@@ -125,6 +126,7 @@ AudioHardware::AudioHardware() :
         fclose(fp);
     }
 }
+
 AudioHardware::~AudioHardware()
 {
     for (size_t index = 0; index < mInputs.size(); index++) {
@@ -144,18 +146,17 @@ AudioStreamOut* AudioHardware::openOutputStream(
         uint32_t devices, int *format, uint32_t *channels, uint32_t *sampleRate, status_t *status)
 {
     { // scope for the lock
-        Mutex::Autolock lock(mLock);
+        android::Mutex::Autolock lock(mLock);
 
-        // only one output stream allowed
+        AudioStreamOutMSM72xx* out;
         if (mOutput) {
-            if (status) {
-                *status = INVALID_OPERATION;
-            }
-            return 0;
+            // only one output stream allowed
+            out = mOutput;
+        } else {
+            // create new output stream
+            out = new AudioStreamOutMSM72xx();
         }
 
-        // create new output stream
-        AudioStreamOutMSM72xx* out = new AudioStreamOutMSM72xx();
         status_t lStatus = out->set(this, devices, format, channels, sampleRate);
         if (status) {
             *status = lStatus;
@@ -170,7 +171,7 @@ AudioStreamOut* AudioHardware::openOutputStream(
 }
 
 void AudioHardware::closeOutputStream(AudioStreamOut* out) {
-    Mutex::Autolock lock(mLock);
+    android::Mutex::Autolock lock(mLock);
     if (mOutput == 0 || mOutput != out) {
         LOGW("Attempt to close invalid output stream");
     }
@@ -209,7 +210,7 @@ AudioStreamIn* AudioHardware::openInputStream(
 }
 
 void AudioHardware::closeInputStream(AudioStreamIn* in) {
-    Mutex::Autolock lock(mLock);
+    android::Mutex::Autolock lock(mLock);
 
     ssize_t index = mInputs.indexOf((AudioStreamInMSM72xx *)in);
     if (index < 0) {
@@ -295,7 +296,7 @@ static status_t set_mic_mute(bool _mute)
 
 status_t AudioHardware::setMicMute(bool state)
 {
-    Mutex::Autolock lock(mLock);
+    android::Mutex::Autolock lock(mLock);
     return setMicMute_nosync(state);
 }
 
@@ -479,7 +480,7 @@ status_t AudioHardware::setVoiceVolume(float v)
     LOGD("setVoiceVolume(%f)\n", v);
     LOGI("Setting in-call volume to %d (available range is 0 to %d)\n", vol, VOICE_VOLUME_MAX);
 
-    Mutex::Autolock lock(mLock);
+    android::Mutex::Autolock lock(mLock);
     set_volume_rpc(vol); //always set current device
     mVoiceVolume = vol;
     return NO_ERROR;
@@ -714,13 +715,13 @@ status_t AudioHardware::set_mRecordState(bool onoff)
 
 status_t AudioHardware::get_snd_dev(void)
 {
-    Mutex::Autolock lock(mLock);
+    android::Mutex::Autolock lock(mLock);
     return mCurSndDevice;
 }
 
 status_t AudioHardware::doRouting(AudioStreamInMSM72xx *input)
 {
-    Mutex::Autolock lock(mLock);
+    android::Mutex::Autolock lock(mLock);
     uint32_t outputDevices = mOutput->devices();
     status_t ret = NO_ERROR;
     int sndDevice = -1;
@@ -852,7 +853,7 @@ status_t AudioHardware::doRouting(AudioStreamInMSM72xx *input)
 
 status_t AudioHardware::checkMicMute()
 {
-    Mutex::Autolock lock(mLock);
+    android::Mutex::Autolock lock(mLock);
     if (mMode != AudioSystem::MODE_IN_CALL) {
         setMicMute_nosync(true);
     }

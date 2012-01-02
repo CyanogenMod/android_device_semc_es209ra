@@ -1,13 +1,14 @@
 # Prebuilt kl keymaps
+usr/idc/es209ra_touch.idc
 usr/keylayout/es209ra_keypad.kl
 usr/keylayout/es209ra_handset.kl
 usr/keychars/es209ra_keypad.kcm.bin
 
 ## RIL related stuff 
+#bin/netd
 lib/libril.so
 bin/port-bridge
 bin/qmuxd
-bin/netd
 lib/libauth.so
 lib/libcm.so
 lib/libdiag.so
@@ -31,7 +32,7 @@ lib/libwmsts.so
 ## Camera proprietaries
 lib/liboemcamera.so
 lib/libmmjpeg.so
-lib/libmmipl.so 
+lib/libmmipl.so
 lib/libcamerasemc.so
 lib/libopencore_common.so
 
@@ -46,12 +47,10 @@ lib/modules/athwlan.bin.z77
 lib/modules/data.patch.hw2_0.bin
 bin/wlan_mac
 bin/wlan_tool
-bin/hostapd
-etc/wifi/hostapd.conf
 
 ## BT proprietary
 bin/hci_qcomm_init
-bin/hciattach
+#bin/hciattach
 
 ## Adreno 200 files
 lib/libgsl.so
@@ -70,10 +69,10 @@ bin/updatemiscta
 lib/libmiscta.so
 
 #hw
-lib/hw/copybit.es209ra.so
+#lib/hw/copybit.es209ra.so
 lib/hw/sensors.es209ra.so
-lib/hw/gralloc.es209ra.so
+#lib/hw/gralloc.es209ra.so
 
 #OMX
 lib/libOmxVdec.so
-lib/libstagefrighthw.so
+#lib/libstagefrighthw.so

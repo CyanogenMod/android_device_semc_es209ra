@@ -19,10 +19,17 @@ echo 15 115 115 115 115 115 115 115 115 115 123 123 123 123 123 123 123 > /sys/c
 echo 16 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 123 > /sys/class/leds/lv5219lg:mled/als_config
 
 mount -o rw,remount -t yaffs2 /dev/block/mtdblock2 /system
-chmod u+s /system/bin/charger
+chmod u+s /system/bin/chargemon
+chmod 777 /system/etc/init.d/*
 mount -o ro,remount -t yaffs2 /dev/block/mtdblock2 /system
 
-#Z FPS Uncap
-mount -t debugfs debugfs /sys/kernel/debug
-echo '0' > /sys/kernel/debug/msm_fb/0/vsync_enable
-umount /sys/kernel/debug
+# copy wpa_supplicant.conf to data wifi if it doesnt exists...
+if [ ! -f /data/misc/wifi/wpa_supplicant.conf ]; then
+
+  cp /system/etc/wifi/wpa_supplicant.conf /data/misc/wifi/wpa_supplicant.conf
+
+fi
+
+  chown wifi.wifi /data/misc/wifi/wpa_supplicant.conf
+  chmod 666 /data/misc/wifi/wpa_supplicant.conf
+
