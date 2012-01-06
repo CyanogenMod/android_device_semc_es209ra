@@ -23,19 +23,22 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     audio_policy.es209ra \
     audio.primary.es209ra \
-    screencap \
-    hwcomposer.qsd8k \
-    libgenlock \
-    librs_jni \
+    camera.es209ra \
     gralloc.es209ra \
-    copybit.qsd8k \
     gps.es209ra \
     lights.es209ra \
+    gralloc.qsd8k \
+    copybit.qsd8k \
+    hwcomposer.qsd8k \
+    libQcomUI \
+    libtilerenderer \
+    libmemalloc \
+    liboverlay \
+    libgenlock \
+    librs_jni \
     libOmxCore \
     libOmxVdec \
     libOmxVidEnc \
-    wlan_tool \
-    wlan_mac \
     libmm-omxcore \
     com.android.future.usb.accessory
 
@@ -54,6 +57,7 @@ PRODUCT_COPY_FILES += \
 # Init files
 PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/init.es209ra.rc:root/init.es209ra.rc \
+    device/semc/es209ra/prebuilt/init.es209ra.usb.rc:root/init.es209ra.usb.rc \
     device/semc/es209ra/prebuilt/init.bt.sh:system/etc/init.bt.sh \
     device/semc/es209ra/prebuilt/DualMicControl.txt:system/etc/DualMicControl.txt \
     device/semc/es209ra/prebuilt/ueventd.es209ra.rc:root/ueventd.es209ra.rc \
@@ -134,7 +138,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qemu.sf.lcd_density=240 \
     keyguard.no_require_sim=true \
     ro.com.google.locationfeatures=1 \
-    ro.telephony.ril.v3=skipbrokendatacall,signalstrength,datacall
+    ro.telephony.ril.v3=skipbrokendatacall,signalstrength,datacall \
     dalvik.vm.dexopt-flags=m=y \
     dalvik.vm.heapsize=48m \
     dalvik.vm.dexopt-data-only=1 \
@@ -148,6 +152,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.ro.ril.sms_sync_sending=1 \
     ro.camera.hd_shrink_vf_enabled=1 \
     persist.android.strictmode=0 \
+    persist.usb.sys.config=mass_storage,adb \
     BUILD_UTC_DATE=0
 
 #    ro.telephony.ril.v3=1\

@@ -4,8 +4,7 @@ usr/keylayout/es209ra_keypad.kl
 usr/keylayout/es209ra_handset.kl
 usr/keychars/es209ra_keypad.kcm.bin
 
-## RIL related stuff 
-#bin/netd
+## RIL related stuff
 lib/libril.so
 bin/port-bridge
 bin/qmuxd
@@ -42,7 +41,7 @@ etc/firmware/yamato_pfp.fw
 etc/firmware/yamato_pm4.fw
 etc/firmware/camfirm.bin
 
-## ATHEROS WIFI 
+## ATHEROS WIFI
 lib/modules/athwlan.bin.z77
 lib/modules/data.patch.hw2_0.bin
 bin/wlan_mac
@@ -50,10 +49,11 @@ bin/wlan_tool
 
 ## BT proprietary
 bin/hci_qcomm_init
-#bin/hciattach
 
 ## Adreno 200 files
 lib/libgsl.so
+lib/libsc-a2xx.so
+lib/egl/eglsubAndroid.so
 lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 lib/egl/libEGL_adreno200.so
@@ -69,10 +69,7 @@ bin/updatemiscta
 lib/libmiscta.so
 
 #hw
-#lib/hw/copybit.es209ra.so
 lib/hw/sensors.es209ra.so
-#lib/hw/gralloc.es209ra.so
 
 #OMX
 lib/libOmxVdec.so
-#lib/libstagefrighthw.so
