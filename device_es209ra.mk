@@ -36,6 +36,7 @@ PRODUCT_PACKAGES += \
     liboverlay \
     libgenlock \
     librs_jni \
+    libcamera \
     libOmxCore \
     libOmxVdec \
     libOmxVidEnc \
