@@ -6,25 +6,15 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 $(call inherit-product-if-exists, vendor/semc/es209ra/es209ra-vendor.mk)
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := X10i
+PRODUCT_NAME := Xperia X10
 PRODUCT_DEVICE := es209ra
 PRODUCT_MODEL := X10i
-
-
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/semc/es209ra/kernel
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
 
 PRODUCT_PACKAGES += \
     screencap \
     librs_jni \
-    gralloc.es209ra \
-    copybit.es209ra \
+    gralloc.qsd8k \
+    copybit.qsd8k \
     gps.es209ra \
     lights.es209ra \
     libOmxCore \
@@ -34,8 +24,6 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     rzscontrol
 
-#PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x10.map
-
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
@@ -43,8 +31,8 @@ DEVICE_PACKAGE_OVERLAYS += device/semc/es209ra/overlay
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
-	device/semc/es209ra/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
-	device/semc/es209ra/prebuilt/gps.conf:system/etc/gps.conf 
+    device/semc/es209ra/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
+    device/semc/es209ra/prebuilt/gps.conf:system/etc/gps.conf
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -56,7 +44,7 @@ PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/bootrec:root/sbin/bootrec \
     device/semc/es209ra/recovery.fstab:root/recovery.fstab \
     device/semc/es209ra/prebuilt/vold.fstab:system/etc/vold.fstab \
-    device/semc/es209ra/prebuilt/initlogo.rle:root/initlogo.rle 
+    device/semc/es209ra/prebuilt/initlogo.rle:root/initlogo.rle
 
 
 #WIFI modules and configs
@@ -101,14 +89,13 @@ PRODUCT_COPY_FILES += \
 
 #Offline charging animation
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_01_H.png:system/semc/chargemon/data/charging_animation_01.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_02_H.png:system/semc/chargemon/data/charging_animation_02.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_03_H.png:system/semc/chargemon/data/charging_animation_03.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_04_H.png:system/semc/chargemon/data/charging_animation_04.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_05_H.png:system/semc/chargemon/data/charging_animation_05.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_06_H.png:system/semc/chargemon/data/charging_animation_06.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_07_H.png:system/semc/chargemon/data/charging_animation_07.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_blank_H.png:system/semc/chargemon/data/charging_animation_blank.png
+    device/semc/es209ra/prebuilt/animations/charging_animation_01_H.png:system/semc/chargemon/data/charging_animation_01.png \
+    device/semc/es209ra/prebuilt/animations/charging_animation_02_H.png:system/semc/chargemon/data/charging_animation_02.png \
+    device/semc/es209ra/prebuilt/animations/charging_animation_03_H.png:system/semc/chargemon/data/charging_animation_03.png \
+    device/semc/es209ra/prebuilt/animations/charging_animation_04_H.png:system/semc/chargemon/data/charging_animation_04.png \
+    device/semc/es209ra/prebuilt/animations/charging_animation_05_H.png:system/semc/chargemon/data/charging_animation_05.png \
+    device/semc/es209ra/prebuilt/animations/charging_animation_06_H.png:system/semc/chargemon/data/charging_animation_06.png \
+    device/semc/es209ra/prebuilt/animations/charging_animation_07_H.png:system/semc/chargemon/data/charging_animation_07.png
 
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-1.so \
@@ -146,5 +133,4 @@ PRODUCT_LOCALES += hdpi
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-
 

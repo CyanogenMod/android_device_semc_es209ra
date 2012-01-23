@@ -3,8 +3,8 @@ on early-boot
 
 on boot
     #rild
-    mkdir		/data/radio
-    chown radio radio	/data/radio
+    mkdir               /data/radio
+    chown radio radio   /data/radio
     #wlan stuff
     mkdir               /data/misc/dhcp 0770 dhcp system
     chown dhcp system   /data/misc/dhcp
