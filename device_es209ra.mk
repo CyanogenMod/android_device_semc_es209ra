@@ -6,9 +6,9 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 $(call inherit-product-if-exists, vendor/semc/es209ra/es209ra-vendor.mk)
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := Xperia X10
+PRODUCT_NAME := es209ra
 PRODUCT_DEVICE := es209ra
-PRODUCT_MODEL := X10i
+PRODUCT_MODEL := es209ra
 
 PRODUCT_PACKAGES += \
     screencap \
