@@ -1,4 +1,4 @@
-import init.es209ra.usb.rc
+#import init.es209ra.usb.rc
 
 on early-boot
     exec /sbin/bootrec
@@ -74,7 +74,7 @@ on boot
     chown system system /sys/devices/platform/i2c-adapter/i2c-0/0-0038/rate
 
     #wifi load
-    insmod /modules/ar6000.ko
+#    insmod /modules/ar6000.ko
 
     class_start default
 
@@ -170,3 +170,7 @@ service iprenew_bnep0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
+# DRM key activation
+service suntrolkac /system/bin/suntrolkac
+    user root
+    oneshot

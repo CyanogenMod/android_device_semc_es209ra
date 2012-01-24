@@ -32,8 +32,8 @@ lib/libwmsts.so
 lib/liboemcamera.so
 lib/libmmjpeg.so
 lib/libmmipl.so
-lib/libcamerasemc.so
-lib/libopencore_common.so
+#lib/libcamera.so
+#lib/libopencore_common.so
 
 
 ## FIRMWARE

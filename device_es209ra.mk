@@ -24,11 +24,11 @@ PRODUCT_PACKAGES += \
     audio_policy.es209ra \
     audio.primary.es209ra \
     camera.es209ra \
-    gralloc.es209ra \
     gps.es209ra \
     lights.es209ra \
     gralloc.qsd8k \
     copybit.qsd8k \
+    camera.qsd8k \
     hwcomposer.qsd8k \
     libQcomUI \
     libtilerenderer \
@@ -53,7 +53,7 @@ DEVICE_PACKAGE_OVERLAYS += device/semc/es209ra/overlay
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
-    device/semc/es209ra/prebuilt/gps.conf:system/etc/gps.conf 
+    device/semc/es209ra/prebuilt/gps.conf:system/etc/gps.conf
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -123,8 +123,7 @@ PRODUCT_COPY_FILES += \
     device/semc/msm7x30-common/prebuilt/animations/charging_animation_04_H.png:system/semc/chargemon/data/charging_animation_04.png \
     device/semc/msm7x30-common/prebuilt/animations/charging_animation_05_H.png:system/semc/chargemon/data/charging_animation_05.png \
     device/semc/msm7x30-common/prebuilt/animations/charging_animation_06_H.png:system/semc/chargemon/data/charging_animation_06.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_07_H.png:system/semc/chargemon/data/charging_animation_07.png \
-    device/semc/msm7x30-common/prebuilt/animations/charging_animation_blank_H.png:system/semc/chargemon/data/charging_animation_blank.png
+    device/semc/msm7x30-common/prebuilt/animations/charging_animation_07_H.png:system/semc/chargemon/data/charging_animation_07.png
 
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-1.so \
