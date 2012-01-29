@@ -1,6 +1,7 @@
 /dev/kgsl-3d0           0666 system graphics
 /dev/genlock            0666 system graphics
 /dev/msm_rotator 	0660 system graphics
+/dev/rtc0		0666 system system
 /dev/msm_pcm_dec* 	0666 system audio
 /dev/snd/controlC0* 	0666 system audio
 /dev/msm_aac* 		0660 system audio

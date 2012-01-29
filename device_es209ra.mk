@@ -32,8 +32,8 @@ PRODUCT_PACKAGES += \
     hwcomposer.qsd8k \
     libQcomUI \
     libtilerenderer \
-    libmemalloc \
     liboverlay \
+    libmemalloc \
     libgenlock \
     librs_jni \
     libcamera \
@@ -42,6 +42,7 @@ PRODUCT_PACKAGES += \
     libOmxVidEnc \
     libmm-omxcore \
     com.android.future.usb.accessory
+
 
 #PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x10.map
 
@@ -153,6 +154,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.hd_shrink_vf_enabled=1 \
     persist.android.strictmode=0 \
     persist.usb.sys.config=mass_storage,adb \
+    hwui.render_dirty_regions=false \
+    hwui.disable_vsync=true \
     BUILD_UTC_DATE=0
 
 #    ro.telephony.ril.v3=1\
