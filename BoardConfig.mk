@@ -28,6 +28,7 @@ BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_LIBRPC := true
 USE_OPENGL_RENDERER := false
 TARGET_HAVE_BYPASS := false
+TARGET_GRALLOC_USES_ASHMEM := true
 TARGET_USES_GENLOCK := true
 TARGET_FORCE_CPU_UPLOAD := true
 COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60
@@ -59,6 +60,6 @@ TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra
 
 BOARD_CAMERA_USE_GETBUFFERINFO := true
 
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
-BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
+#BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0
 

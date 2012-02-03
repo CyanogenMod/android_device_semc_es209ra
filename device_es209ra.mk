@@ -139,6 +139,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qemu.sf.lcd_density=240 \
     keyguard.no_require_sim=true \
     ro.com.google.locationfeatures=1 \
+    ro.telephony.ril.v3=1\
     ro.telephony.ril.v3=skipbrokendatacall,signalstrength,datacall \
     dalvik.vm.dexopt-flags=m=y \
     dalvik.vm.heapsize=48m \
@@ -152,13 +153,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.locale.region=US \
     persist.ro.ril.sms_sync_sending=1 \
     ro.camera.hd_shrink_vf_enabled=1 \
-    persist.android.strictmode=0 \
-    persist.usb.sys.config=mass_storage,adb \
     hwui.render_dirty_regions=false \
     hwui.disable_vsync=true \
+    persist.sys.usb.config=mtp,adb \
     BUILD_UTC_DATE=0
 
-#    ro.telephony.ril.v3=1\
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.tethering.kb_disconnect=1
