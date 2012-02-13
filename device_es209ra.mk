@@ -10,41 +10,30 @@ PRODUCT_NAME := es209ra
 PRODUCT_DEVICE := es209ra
 PRODUCT_MODEL := es209ra
 
-
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/semc/es209ra/kernel
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+    $(TARGET_PREBUILT_KERNEL):kernel
 
 PRODUCT_PACKAGES += \
     audio_policy.es209ra \
     audio.primary.es209ra \
+    hwcomposer.qsd8k \
     camera.es209ra \
     gps.es209ra \
     lights.es209ra \
     gralloc.qsd8k \
     copybit.qsd8k \
     camera.qsd8k \
-    hwcomposer.qsd8k \
     libQcomUI \
-    libtilerenderer \
-    liboverlay \
-    libmemalloc \
-    libgenlock \
     librs_jni \
     libcamera \
     libOmxCore \
     libOmxVdec \
     libOmxVidEnc \
     libmm-omxcore \
+    libtilerenderer \
+    liboverlay \
     com.android.future.usb.accessory
-
-
-#PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/es209ra/prelink-linux-arm-x10.map
 
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
@@ -155,6 +144,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.hd_shrink_vf_enabled=1 \
     hwui.render_dirty_regions=false \
     hwui.disable_vsync=true \
+    debug.composition.type=mdp \
+    debug.sf.hw=1 \
     persist.sys.usb.config=mtp,adb \
     BUILD_UTC_DATE=0
 

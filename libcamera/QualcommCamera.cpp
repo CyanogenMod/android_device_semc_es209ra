@@ -16,18 +16,16 @@
 
 /*#error uncomment this for compiler test!*/
 
-//#define LOG_NDEBUG 0
-#define LOG_NIDEBUG 0
+#define LOG_NDEBUG 1
+#define LOG_NIDEBUG 1
 #define LOG_TAG "QualcommCamera"
 #include <utils/Log.h>
 #include <utils/threads.h>
 #include <fcntl.h>
 #include <sys/mman.h>
 
-/* include QCamera Hardware Interface Header*/
 #include "QualcommCamera.h"
 #include "QualcommCameraHardware.h"
-//#include <camera/CameraHardwareInterface.h>
 
 extern "C" {
 #include <sys/time.h>

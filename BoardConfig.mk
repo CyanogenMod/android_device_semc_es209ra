@@ -13,6 +13,8 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
 ARCH_ARM_HAVE_ARMV7A_BUG := true
+ARCH_ARM_HAVE_NEON := true
+#DEBUG_V8 := true
 
 BOARD_USES_GENERIC_AUDIO := false
 
@@ -31,8 +33,8 @@ TARGET_HAVE_BYPASS := false
 TARGET_GRALLOC_USES_ASHMEM := true
 TARGET_USES_GENLOCK := true
 TARGET_FORCE_CPU_UPLOAD := true
-COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60
 BOARD_EGL_CFG := device/semc/msm7x30-common/prebuilt/egl.cfg
+COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60 -DQCOM_HARDWARE
 
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_AMSS_VERSION := 1240
@@ -57,8 +59,6 @@ BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/semc_ota_from_target_files
 
 TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra
-
-BOARD_CAMERA_USE_GETBUFFERINFO := true
 
 #TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
 #BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0

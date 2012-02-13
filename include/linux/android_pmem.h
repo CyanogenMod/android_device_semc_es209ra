@@ -132,6 +132,8 @@ int32_t pmem_kfree(const int32_t physaddr);
 #define PMEM_KERNEL_EBI1_DATA_NAME "pmem_kernel_ebi1"
 #define PMEM_KERNEL_SMI_DATA_NAME "pmem_kernel_smi"
 
+#define MDP_BLIT_NON_CACHED		0x01000000
+
 struct android_pmem_platform_data
 {
 	const char* name;
@@ -179,6 +181,13 @@ int pmem_setup(struct android_pmem_platform_data *pdata,
 
 int pmem_remap(struct pmem_region *region, struct file *file,
 	       unsigned operation);
+
+struct msmfb_overlay_3d {
+	uint32_t is_3d;
+	uint32_t width;
+	uint32_t height;
+};
+
 #endif /* __KERNEL__ */
 
 #endif //_ANDROID_PPP_H_

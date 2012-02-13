@@ -167,8 +167,7 @@ struct mdp_img {
 	uint32_t height;
 	uint32_t format;
 	uint32_t offset;
-	int memory_id;		/* the file descriptor */
-	uint32_t priv;
+	int memory_id;
 };
 
 /*
@@ -234,9 +233,6 @@ struct msmfb_data {
 struct msmfb_overlay_data {
 	uint32_t id;
 	struct msmfb_data data;
-	uint32_t version_key;
-	struct msmfb_data plane1_data;
-	struct msmfb_data plane2_data;
 };
 
 struct msmfb_img {
@@ -273,7 +269,6 @@ struct mdp_overlay {
 	uint32_t flags;
 	uint32_t id;
 	uint32_t user_data[8];
-	struct dpp_ctrl dpp;
 };
 
 struct msmfb_overlay_3d {

@@ -20,83 +20,77 @@
 
 #define ICS
 
-//#include <camera/CameraHardwareInterface.h>
 #include <utils/threads.h>
 #include <binder/MemoryBase.h>
 #include <binder/MemoryHeapBase.h>
 #include <stdint.h>
 #include <ui/egl/android_natives.h>
-#ifdef ICS
 #include <hardware/camera.h>
-#endif
 #include <camera/Camera.h>
 #include <camera/CameraParameters.h>
 #include <system/window.h>
 #include <system/camera.h>
 #include <hardware/camera.h>
 #include <gralloc_priv.h>
-//#include <QComOMXMetadata.h>
 
 extern "C" {
 #include <linux/android_pmem.h>
-#include <linux/ion.h>
-//#include <camera.h>
-//#include <camera_defs_i.h>
-//#include <mm_camera_interface.h>
 }
-
-#define MAX_SNAPSHOT_BUFFERS 1
-
-#define CAMERA_EFFECT_OFF		0
-#define CAMERA_EFFECT_MONO		1
-#define CAMERA_EFFECT_NEGATIVE		2
-#define CAMERA_EFFECT_SOLARIZE		3
-#define CAMERA_EFFECT_SEPIA		4
-#define CAMERA_EFFECT_POSTERIZE		5
-#define CAMERA_EFFECT_WHITEBOARD	6
-#define CAMERA_EFFECT_BLACKBOARD	7
-#define CAMERA_EFFECT_AQUA		8
-
-#define CAMERA_SCENE_MODE_AUTO 0
-#define CAMERA_SCENE_MODE_LANDSCAPE 1
-#define CAMERA_SCENE_MODE_PORTRAIT 2
-#define CAMERA_SCENE_MODE_NIGHT 3
-#define CAMERA_SCENE_MODE_NIGHT_PORTRAIT 4
-#define CAMERA_SCENE_MODE_SUNSET 5
 
 struct str_map {
     const char *const desc;
     int val;
 };
 
-struct msm_frame {
-	int path;
-	unsigned long buffer;
-	uint32_t y_off;
-	uint32_t cbcr_off;
-	int fd;
-
-	void *cropinfo;
-	int croplen;
-};
-
 struct buffer_map {
-    msm_frame *frame;
+    struct msm_frame *frame;
     buffer_handle_t * buffer;
     int size;
 };
 
+typedef enum {
+    TARGET_MSM7625,
+    TARGET_MSM7627,
+    TARGET_QSD8250,
+    TARGET_MSM7630,
+    TARGET_MAX
+}targetType;
+
+typedef enum {
+    LIVESHOT_DONE,
+    LIVESHOT_IN_PROGRESS,
+    LIVESHOT_STOPPED
+}liveshotState;
+
+#define MIN_UNDEQUEUD_BUFFER_COUNT 2
+#define MAX_SNAPSHOT_BUFFERS 4
+
+struct target_map {
+    const char *targetStr;
+    targetType targetEnum;
+};
+
+struct board_property{
+    targetType target;
+    unsigned int previewSizeMask;
+    bool hasSceneDetect;
+    bool hasSelectableZoneAf;
+    bool hasFaceDetect;
+};
+
 typedef struct {
 	unsigned int in1_w;
-	unsigned int in1_h;
 	unsigned int out1_w;
+	unsigned int in1_h;
 	unsigned int out1_h;
 	unsigned int in2_w;
-	unsigned int in2_h;
 	unsigned int out2_w;
+	unsigned int in2_h;
 	unsigned int out2_h;
-	uint8_t update_flag; 
+	uint8_t update_flag;
 } common_crop_t;
+
+typedef uint8_t cam_ctrl_type;
 
 typedef struct {
 	unsigned short video_width;
@@ -109,12 +103,14 @@ typedef struct {
 	unsigned short orig_picture_dy;
 	unsigned short ui_thumbnail_height;
 	unsigned short ui_thumbnail_width;
-	unsigned short thumbnail_width;
 	unsigned short thumbnail_height;
+	unsigned short thumbnail_width;
 	unsigned short raw_picture_height;
 	unsigned short raw_picture_width;
 	unsigned short filler7;
 	unsigned short filler8;
+	unsigned short postview_height;
+	unsigned short postview_width;
 } cam_ctrl_dimension_t;
 
 typedef struct {
@@ -124,12 +120,6 @@ typedef struct {
     int32_t fd;
     uint32_t offset;
 }mm_camera_buffer_t;
-
-struct cam_frame_start_parms {
-	unsigned int unknown;
-	struct msm_frame frame;
-	struct msm_frame video_frame;
-};
 
 /* Add enumenrations at the bottom but before MM_CAMERA_PARM_MAX */
 typedef enum {
@@ -212,6 +202,33 @@ typedef enum {
     MM_CAMERA_PARM_MAX
 } mm_camera_parm_type_t;
 
+enum {
+	CAMERA_AEC_FRAME_AVERAGE,
+	CAMERA_AEC_CENTER_WEIGHTED,
+	CAMERA_AEC_SPOT_METERING,
+};
+
+typedef enum {
+	AF_MODE_NORMAL,
+	AF_MODE_MACRO,
+	AF_MODE_AUTO,
+} isp3a_af_mode_t;
+
+enum {
+	LED_MODE_OFF,
+	LED_MODE_AUTO,
+	LED_MODE_TORCH,
+	LED_MODE_ON,
+};
+
+typedef enum {
+    CAMERA_ANTIBANDING_OFF,
+    CAMERA_ANTIBANDING_60HZ,
+    CAMERA_ANTIBANDING_50HZ,
+    CAMERA_ANTIBANDING_AUTO,
+    CAMERA_MAX_ANTIBANDING,
+} camera_antibanding_type;
+
 typedef enum {
 	CAMERA_WB_MIN_MINUS_1,
 	CAMERA_WB_AUTO = 1,  /* This list must match aeecamera.h */
@@ -225,53 +242,17 @@ typedef enum {
 	CAMERA_WB_MAX_PLUS_1
 } camera_wb_type;
 
-typedef enum {
-    CAMERA_ANTIBANDING_OFF,
-    CAMERA_ANTIBANDING_60HZ,
-    CAMERA_ANTIBANDING_50HZ,
-    CAMERA_ANTIBANDING_AUTO,
-    CAMERA_MAX_ANTIBANDING,
-} camera_antibanding_type;
+typedef struct {
+	uint32_t timestamp;  /* seconds since 1/6/1980          */
+	double   latitude;   /* degrees, WGS ellipsoid */
+	double   longitude;  /* degrees                */
+	int16_t  altitude;   /* meters                          */
+} camera_position_type;
 
-typedef enum {
-	AF_MODE_NORMAL,
-	AF_MODE_MACRO,
-	AF_MODE_AUTO,
-} isp3a_af_mode_t;
-
-enum {
-	CAMERA_AEC_FRAME_AVERAGE,
-	CAMERA_AEC_CENTER_WEIGHTED,
-	CAMERA_AEC_SPOT_METERING,
-};
-
-enum {
-	LED_MODE_OFF,
-	LED_MODE_AUTO,
-	LED_MODE_ON,
-};
-
-typedef enum {
-	CAMERA_ISO_AUTO,
-	CAMERA_ISO_DEBLUR,
-	CAMERA_ISO_100,
-	CAMERA_ISO_200,
-	CAMERA_ISO_400,
-	CAMERA_ISO_800,
-	CAMERA_ISO_1600,
-} camera_iso_mode_type;
-
-struct fifo_queue {
-	int num_of_frames;
-	int front;
-	struct fifo_node *node;
-	pthread_mutex_t mut;
-	pthread_cond_t wait;
-};
-
-struct fifo_node {
-	struct msm_frame *f;
-	struct fifo_node *next;
+struct cam_frame_start_parms {
+	unsigned int unknown;
+	struct msm_frame frame;
+	struct msm_frame video_frame;
 };
 
 typedef unsigned int exif_tag_id_t;
@@ -306,39 +287,18 @@ typedef struct {
 	exif_tag_entry_t tag_entry;
 } exif_tags_info_t;
 
-
-/*---------------------------------------------------------------------------------------------------------------------*/
-typedef enum {
-    TARGET_MSM7625,
-    TARGET_MSM7625A,
-    TARGET_MSM7627,
-    TARGET_MSM7627A,
-    TARGET_QSD8250,
-    TARGET_MSM7630,
-    TARGET_MSM8660,
-    TARGET_MAX
-}targetType;
-
-typedef enum {
-    LIVESHOT_DONE,
-    LIVESHOT_IN_PROGRESS,
-    LIVESHOT_STOPPED
-}liveshotState;
-
-#define MIN_UNDEQUEUD_BUFFER_COUNT 2
-
-struct target_map {
-    const char *targetStr;
-    targetType targetEnum;
-};
-
-struct board_property{
-    targetType target;
-    unsigned int previewSizeMask;
-    bool hasSceneDetect;
-    bool hasSelectableZoneAf;
-    bool hasFaceDetect;
-};
+/* EXIF tag IDs */
+#define EXIFTAGID_GPS_LATITUDE 0x20002
+#define EXIFTAGID_GPS_LATITUDE_REF 0x10001
+#define EXIFTAGID_GPS_LONGITUDE 0x40004
+#define EXIFTAGID_GPS_LONGITUDE_REF 0x30003
+#define EXIFTAGID_GPS_ALTITUDE 0x60006
+#define EXIFTAGID_GPS_ALTITUDE_REF 0x50005
+#define EXIFTAGID_EXIF_CAMERA_MAKER 0x21010F
+#define EXIFTAGID_EXIF_CAMERA_MODEL 0x220110
+#define EXIFTAGID_EXIF_DATE_TIME_ORIGINAL 0x3A9003
+#define EXIFTAGID_EXIF_DATE_TIME 0x3B9004
+/* End of values originally in proprietary headers */
 
 namespace android {
 
@@ -379,10 +339,8 @@ public:
     virtual sp<IMemory> getVideoBuffer(int32_t index);
     virtual status_t getBufferInfo( sp<IMemory>& Frame, size_t *alignedSize);
     virtual void encodeData( );
-#ifdef ICS
     virtual status_t set_PreviewWindow(void* param);
     virtual status_t setPreviewWindow(preview_stream_ops_t* window);
-#endif
     virtual status_t setPreviewWindow(const sp<ANativeWindow>& buf) {return NO_ERROR;};
     virtual void release();
 
@@ -400,9 +358,6 @@ public:
     void receive_camframe_error_timeout();
     static void getCameraInfo();
     void receiveRawPicture(status_t status,struct msm_frame *postviewframe, struct msm_frame *mainframe);
-    int allocate_ion_memory(int *main_ion_fd, struct ion_allocation_data* alloc,
-    struct ion_fd_data* ion_info_fd, int ion_type, int size, int *memfd);
-    int deallocate_ion_memory(int *main_ion_fd, struct ion_fd_data* ion_info_fd);
     virtual ~QualcommCameraHardware();
     int storeMetaDataInBuffers(int enable);
 
@@ -410,10 +365,10 @@ private:
     QualcommCameraHardware();
     status_t startPreviewInternal();
     status_t startRecordingInternal();
-    status_t setHistogramOn();
-    status_t setHistogramOff();
-    status_t runFaceDetection();
-    status_t setFaceDetection(const char *str);
+//    status_t setHistogramOn();
+//    status_t setHistogramOff();
+//    status_t runFaceDetection();
+//    status_t setFaceDetection(const char *str);
 
     void stopPreviewInternal();
     friend void *auto_focus_thread(void *user);
@@ -521,36 +476,7 @@ private:
         struct pmem_region mSize;
         sp<QualcommCameraHardware::MMCameraDL> mMMCameraDLRef;
     };
-//TODO
-    struct IonPool : public MemPool {
-        IonPool( int ion_heap_id, int flags, int ion_type,
-             int buffer_size, int num_buffers,
-             int frame_size, int cbcr_offset,
-             int yoffset, const char *name);
-    virtual ~IonPool();
-    int mFd;
-    int mIonType;
-    int mCbCrOffset;
-    int myOffset;
-    int mCameraControlFd;
-    uint32_t mAlignedSize;
-    sp<QualcommCameraHardware::MMCameraDL> mMMCameraDLRef;
-    static const char mIonDevName[];
-    };
-#ifdef USE_ION
-//    sp<IonPool> mPreviewHeap;
-    sp<IonPool> mYV12Heap;
-    sp<IonPool> mRecordHeap;
-    sp<IonPool> mThumbnailHeap;
-    sp<IonPool> mRawHeap;
-    sp<IonPool> mDisplayHeap;
-    sp<AshmemPool> mJpegHeap;
-    sp<AshmemPool> mStatHeap;
-    sp<AshmemPool> mMetaDataHeap;
-    sp<IonPool> mRawSnapShotPmemHeap;
-    sp<IonPool> mLastPreviewFrameHeap;
-    sp<IonPool> mPostviewHeap;
-#else
+
 //    sp<PmemPool> mPreviewHeap;
     sp<PmemPool> mYV12Heap;
     sp<PmemPool> mRecordHeap;
@@ -565,7 +491,6 @@ private:
     sp<PmemPool> mPostviewHeap;
 	sp<PmemPool> mPostViewHeap;
     sp<PmemPool> mInitialPreviewHeap;
-#endif
 
     sp<MMCameraDL> mMMCameraDLRef;
 
@@ -644,16 +569,16 @@ private:
     void runSmoothzoomThread(void* data);
 
     // For Histogram
-    int mStatsOn;
-    int mCurrent;
-    bool mSendData;
-    Mutex mStatsWaitLock;
-    Condition mStatsWait;
+//    int mStatsOn;
+//    int mCurrent;
+//    bool mSendData;
+//    Mutex mStatsWaitLock;
+//    Condition mStatsWait;
 
     //For Face Detection
-    int mFaceDetectOn;
-    bool mSendMetaData;
-    Mutex mMetaDataWaitLock;
+//    int mFaceDetectOn;
+//    bool mSendMetaData;
+//    Mutex mMetaDataWaitLock;
 
     bool mShutterPending;
     Mutex mShutterLock;
@@ -804,20 +729,8 @@ private:
     camera_memory_t *mStatsMapped[3];
     camera_memory_t *mRecordMapped[9];
     camera_memory_t* metadata_memory[9];
-    int raw_main_ion_fd[MAX_SNAPSHOT_BUFFERS];
-    int raw_snapshot_main_ion_fd;
-    int Jpeg_main_ion_fd[MAX_SNAPSHOT_BUFFERS];
-    int record_main_ion_fd[9];
-    struct ion_allocation_data raw_alloc[MAX_SNAPSHOT_BUFFERS];
-    struct ion_allocation_data raw_snapshot_alloc;
-    struct ion_allocation_data Jpeg_alloc[MAX_SNAPSHOT_BUFFERS];
-    struct ion_allocation_data record_alloc[9];
-    struct ion_fd_data raw_ion_info_fd[MAX_SNAPSHOT_BUFFERS];
-    struct ion_fd_data raw_snapshot_ion_info_fd;
-    struct ion_fd_data Jpeg_ion_info_fd[MAX_SNAPSHOT_BUFFERS];
-    struct ion_fd_data record_ion_info_fd[9];
 
-    struct msm_frame frames[kPreviewBufferCount + MIN_UNDEQUEUD_BUFFER_COUNT];
+    struct msm_frame *frames[kPreviewBufferCount + MIN_UNDEQUEUD_BUFFER_COUNT];
     struct buffer_map frame_buffer[kPreviewBufferCount + MIN_UNDEQUEUD_BUFFER_COUNT];
     struct msm_frame *recordframes;
     struct msm_frame *rawframes;
@@ -826,7 +739,6 @@ private:
     preview_stream_ops_t* mPreviewWindow;
     android_native_buffer_t *mPostViewBuffer;
     buffer_handle_t *mThumbnailBuffer[MAX_SNAPSHOT_BUFFERS];
-    bool mIs3DModeOn;
 
     int32_t mMsgEnabled;    // camera msg to be handled
     camera_notify_callback mNotifyCallback;
@@ -855,12 +767,11 @@ private:
     int mPictureHeight;
     int mPostviewWidth;
     int mPostviewHeight;
-	int mTotalPreviewBufferCount;
+    int mTotalPreviewBufferCount;
     int mDenoiseValue;
     int mZslEnable;
     int mZslPanorama;
     bool mZslFlashEnable;
-//    cam_3d_frame_format_t mSnapshot3DFormat;
     bool mSnapshotCancel;
     bool mHFRMode;
     Mutex mSnapshotCancelLock;

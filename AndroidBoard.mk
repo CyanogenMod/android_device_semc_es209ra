@@ -14,14 +14,3 @@
 
 LOCAL_PATH := device/semc/es209ra/
 
-#
-# Boot files
-#
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
-endif
-
-
-
-
-

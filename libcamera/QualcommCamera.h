@@ -17,9 +17,6 @@
 #ifndef ANDROID_HARDWARE_QUALCOMM_CAMERA_H
 #define ANDROID_HARDWARE_QUALCOMM_CAMERA_H
 
-
-//#include <camera/CameraHardwareInterface.h>
-
 extern "C" {
 #include <hardware/camera.h>
 

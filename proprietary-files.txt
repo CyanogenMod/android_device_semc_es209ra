@@ -2,7 +2,6 @@
 usr/idc/es209ra_touch.idc
 usr/keylayout/es209ra_keypad.kl
 usr/keylayout/es209ra_handset.kl
-usr/keychars/es209ra_keypad.kcm.bin
 
 ## RIL related stuff
 lib/libril.so

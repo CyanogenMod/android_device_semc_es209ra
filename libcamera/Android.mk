@@ -1,4 +1,4 @@
-BUILD_LIBCAMERA:=false
+BUILD_LIBCAMERA:=true
 ifeq ($(BUILD_LIBCAMERA),true)
 
 # When zero we link against libmmcamera; when 1, we dlopen libmmcamera.
@@ -19,12 +19,7 @@ MM_CAM_FILES:=
 
 LOCAL_SRC_FILES := $(MM_CAM_FILES) $(LOCAL_HAL_FILES)
 
-LOCAL_CFLAGS+= -DNUM_PREVIEW_BUFFERS=4 -D_ANDROID_
-
-# To Choose neon/C routines for YV12 conversion
-LOCAL_CFLAGS+= -DUSE_NEON_CONVERSION
-# Uncomment below line to enable smooth zoom
-#LOCAL_CFLAGS+= -DCAMERA_SMOOTH_ZOOM
+LOCAL_CFLAGS+= -DNUM_PREVIEW_BUFFERS=4 -D_ANDROID_ -DUSE_NEON_CONVERSION
 
 LOCAL_C_INCLUDES+= \
     $(TARGET_OUT_HEADERS)/mm-camera \
