@@ -19,7 +19,8 @@
 /dev/es209ra_proximity 	0660 system system
 /dev/akm8973_aot        0664 compass system
 # camera sensor
-/dev/semc_imx046_camera 0660 system system
+/dev/semc_imx046_camera 0660 system camera
+/dev/msm_camera/*       0660    system      camera
 /dev/pmem_swiqi           0660   system     graphics
 /dev/bma250               0640   compass    system
 /dev/msm_vidc_dec         0660   system     audio

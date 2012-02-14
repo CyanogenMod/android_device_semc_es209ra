@@ -17,7 +17,6 @@ PRODUCT_PACKAGES += \
     copybit.qsd8k \
     gps.es209ra \
     lights.es209ra \
-    libOmxCore \
     libOmxVdec \
     libOmxVidEnc \
     libmm-omxcore \

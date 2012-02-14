@@ -52,6 +52,3 @@ BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/semc_ota_from_target_files
 
 TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra
-
-BOARD_CAMERA_USE_GETBUFFERINFO := true
-
