@@ -56,6 +56,13 @@ struct target_map {
     targetType targetEnum;
 };
 
+typedef struct jpeg_quality_t { 
+int picsize; 
+uint32_t a; 
+uint32_t b; 
+uint32_t c; 
+} jpeg_quality_t;
+
 struct board_property{
     targetType target;
     unsigned int previewSizeMask;
