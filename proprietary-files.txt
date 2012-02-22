@@ -71,4 +71,7 @@ lib/libmiscta.so
 lib/hw/sensors.es209ra.so
 
 #OMX
-lib/libOmxVdec.so
+lib/libOmxCore.so
+lib/libOmxEvrcDec.so
+lib/libOmxQcelp13Dec.so
+lib/libOmxVidEnc.so

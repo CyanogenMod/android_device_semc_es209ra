@@ -17,6 +17,8 @@
 #include <linux/types.h>
 #include <linux/fb.h>
 
+#define MDP_BORDERFILL_SUPPORTED        0x00010000
+
 #define MSMFB_IOCTL_MAGIC 'm'
 #define MSMFB_GRP_DISP          _IOW(MSMFB_IOCTL_MAGIC, 1, unsigned int)
 #define MSMFB_BLIT              _IOW(MSMFB_IOCTL_MAGIC, 2, unsigned int)

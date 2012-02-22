@@ -5,6 +5,8 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 # proprietary side of the device
 $(call inherit-product-if-exists, vendor/semc/es209ra/es209ra-vendor.mk)
 
+$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
+
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := es209ra
 PRODUCT_DEVICE := es209ra
@@ -131,7 +133,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril.v3=1\
     ro.telephony.ril.v3=skipbrokendatacall,signalstrength,datacall \
     dalvik.vm.dexopt-flags=m=y \
-    dalvik.vm.heapsize=48m \
     dalvik.vm.dexopt-data-only=1 \
     dalvik.vm.lockprof.threshold=500 \
     dalvik.vm.execution-mode=int:jit \

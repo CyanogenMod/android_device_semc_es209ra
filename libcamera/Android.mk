@@ -1,4 +1,4 @@
-BUILD_LIBCAMERA:=true
+BUILD_LIBCAMERA:=false
 ifeq ($(BUILD_LIBCAMERA),true)
 
 # When zero we link against libmmcamera; when 1, we dlopen libmmcamera.
@@ -14,7 +14,8 @@ LOCAL_CFLAGS:= -DDLOPEN_LIBMMCAMERA=$(DLOPEN_LIBMMCAMERA)
 
 LOCAL_CFLAGS+= -DHW_ENCODE
 
-LOCAL_HAL_FILES := QualcommCamera.cpp QualcommCameraHardware.cpp
+LOCAL_HAL_FILES := QualcommCamera.cpp 
+#QualcommCameraHardware.cpp
 MM_CAM_FILES:=
 
 LOCAL_SRC_FILES := $(MM_CAM_FILES) $(LOCAL_HAL_FILES)
