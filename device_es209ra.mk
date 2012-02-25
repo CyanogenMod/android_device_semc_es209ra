@@ -122,6 +122,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.ro.ril.sms_sync_sending=1 \
     ro.camera.hd_shrink_vf_enabled=1 \
     persist.android.strictmode=0 \
+    persist.sys.scrollingcache=2 \
     BUILD_UTC_DATE=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
