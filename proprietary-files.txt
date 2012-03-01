@@ -67,9 +67,6 @@ bin/chargemon
 bin/updatemiscta
 lib/libmiscta.so
 
-#hw
-lib/hw/sensors.es209ra.so
-
 #OMX
 lib/libOmxCore.so
 lib/libOmxEvrcDec.so
