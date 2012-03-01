@@ -31,13 +31,17 @@ lib/libwmsts.so
 ## Camera proprietaries
 lib/liboemcamera.so
 lib/libmmjpeg.so
-lib/libmmipl.so
+lib/libmmipl.so 
+lib/libcamerasemc.so
+lib/libopencore_common.so
+
 
 ## FIRMWARE
 etc/firmware/yamato_pfp.fw
 etc/firmware/yamato_pm4.fw
+etc/firmware/camfirm.bin
 
-## ATHEROS WIFI
+## ATHEROS WIFI 
 lib/modules/athwlan.bin.z77
 lib/modules/data.patch.hw2_0.bin
 bin/wlan_mac
@@ -47,6 +51,7 @@ etc/wifi/hostapd.conf
 
 ## BT proprietary
 bin/hci_qcomm_init
+bin/hciattach
 
 ## Adreno 200 files
 lib/libgsl.so
@@ -65,10 +70,9 @@ bin/updatemiscta
 lib/libmiscta.so
 
 #hw
-lib/hw/sensors.es209ra.so
+lib/hw/copybit.es209ra.so
 lib/hw/gralloc.es209ra.so
 
 #OMX
-lib/libOmxCore.so
-lib/libOmxEvrcDec.so
-lib/libOmxQcelp13Dec.so
+lib/libOmxVdec.so
+lib/libstagefrighthw.so
