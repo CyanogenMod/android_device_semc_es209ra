@@ -34,7 +34,6 @@ PRODUCT_PACKAGES += \
     camera.qsd8k \
     libQcomUI \
     librs_jni \
-    libcamera \
     libOmxCore \
     libOmxVdec \
     libOmxVidEnc \
