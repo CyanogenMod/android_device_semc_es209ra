@@ -7,6 +7,12 @@ $(call inherit-product-if-exists, vendor/semc/es209ra/es209ra-vendor.mk)
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
+# These is the hardware-specific overlay, which points to the location
+# of hardware-specific resource overrides, typically the frameworks and
+# application settings that are stored in resourced.
+DEVICE_PACKAGE_OVERLAYS += device/semc/es209ra/overlay
+
+
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := es209ra
 PRODUCT_DEVICE := es209ra
@@ -36,11 +42,6 @@ PRODUCT_PACKAGES += \
     libtilerenderer \
     liboverlay \
     com.android.future.usb.accessory
-
-# These is the hardware-specific overlay, which points to the location
-# of hardware-specific resource overrides, typically the frameworks and
-# application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS += device/semc/es209ra/overlay
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \

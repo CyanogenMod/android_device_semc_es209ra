@@ -31,7 +31,7 @@ lib/libwmsts.so
 lib/liboemcamera.so
 lib/libmmjpeg.so
 lib/libmmipl.so
-#lib/libcamera.so
+lib/libcamera.so
 #lib/libopencore_common.so
 
 
@@ -66,6 +66,9 @@ bin/akmd2
 bin/chargemon
 bin/updatemiscta
 lib/libmiscta.so
+
+#hw
+lib/hw/sensors.es209ra.so
 
 #OMX
 lib/libOmxCore.so

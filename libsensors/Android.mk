@@ -1,4 +1,4 @@
-ifeq ($(BUILD_SEMC_SENSORS),true)
+ifeq ($(BUILD_SEMC_SENORS),true)
 
 LOCAL_PATH := $(call my-dir)
 
