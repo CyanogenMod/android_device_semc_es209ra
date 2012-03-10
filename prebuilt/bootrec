@@ -31,6 +31,7 @@ if [ -s /dev/keycheck -o -e /cache/recovery/boot ]
 then
 echo 0 > /sys/class/android_usb/android0/enable
 restart adbd
+setprop service.adb.root 1
 echo 1 > /sys/class/android_usb/android0/enable
 
 rm /cache/recovery/boot
@@ -48,7 +49,6 @@ mkdir /etc
 cp /recovery.fstab /etc/recovery.fstab
 mount /dev/block/mmcblk0p1 /sdcard
 /sbin/recovery &
-/sbin/adbd recovery
 fi
 
 /system/bin/chargemon
