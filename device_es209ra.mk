@@ -55,7 +55,7 @@ PRODUCT_COPY_FILES += \
     device/semc/es209ra/prebuilt/DualMicControl.txt:system/etc/DualMicControl.txt \
     device/semc/es209ra/prebuilt/ueventd.es209ra.rc:root/ueventd.es209ra.rc \
     device/semc/es209ra/prebuilt/hw_config.sh:system/etc/hw_config.sh \
-    device/semc/es209ra/prebuilt/bootrec:root/sbin/bootrec \
+    device/semc/es209ra/prebuilt/bootrec-device:root/sbin/bootrec-device \
     device/semc/es209ra/recovery.fstab:root/recovery.fstab \
     device/semc/es209ra/prebuilt/vold.fstab:system/etc/vold.fstab \
     device/semc/es209ra/prebuilt/initlogo.rle:root/initlogo.rle
