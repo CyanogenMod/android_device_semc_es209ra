@@ -50,6 +50,8 @@ bin/wlan_tool
 bin/hci_qcomm_init
 
 ## Adreno 200 files
+lib/libC2D.so
+lib/libOpenVG.so
 lib/libgsl.so
 lib/libsc-a2xx.so
 lib/egl/eglsubAndroid.so
