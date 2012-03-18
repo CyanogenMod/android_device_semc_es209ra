@@ -50,7 +50,7 @@ bin/wlan_tool
 bin/hci_qcomm_init
 
 ## Adreno 200 files
-lib/libC2D.so
+lib/libC2D2.so
 lib/libOpenVG.so
 lib/libgsl.so
 lib/libsc-a2xx.so
@@ -73,4 +73,4 @@ lib/libmiscta.so
 lib/libOmxCore.so
 lib/libOmxEvrcDec.so
 lib/libOmxQcelp13Dec.so
-lib/libOmxVidEnc.so
+#lib/libOmxVidEnc.so
