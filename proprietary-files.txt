@@ -51,7 +51,6 @@ etc/wifi/hostapd.conf
 
 ## BT proprietary
 bin/hci_qcomm_init
-bin/hciattach
 
 ## Adreno 200 files
 lib/libgsl.so
