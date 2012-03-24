@@ -32,6 +32,7 @@ PRODUCT_PACKAGES += \
     gralloc.qsd8k \
     copybit.qsd8k \
     camera.qsd8k \
+    sensors.es209ra \
     libQcomUI \
     librs_jni \
     libOmxCore \
