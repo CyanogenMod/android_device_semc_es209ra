@@ -68,7 +68,5 @@ bin/updatemiscta
 lib/libmiscta.so
 
 #OMX
-lib/libOmxCore.so
 lib/libOmxEvrcDec.so
 lib/libOmxQcelp13Dec.so
-#lib/libOmxVidEnc.so
