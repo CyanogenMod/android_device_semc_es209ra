@@ -433,8 +433,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
   Item.GetMetadata(input_zip)
   Item.Get("system").SetPermissions(script)
 
-  kernel_img = open(OPTIONS.device_out + '/boot.img','r')
-  common.ZipWriteStr(output_zip, "boot.img", kernel_img.read())
+  kernel_img = open(OPTIONS.device_out + '/kernel.sin','r')
+  common.ZipWriteStr(output_zip, "kernel.sin", kernel_img.read())
   kernel_img.close()
 
   script.ShowProgress(0.2, 0)

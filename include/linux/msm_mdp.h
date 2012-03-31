@@ -81,6 +81,7 @@ enum {
 	MDP_RGB_565,      /* RGB 565 planer */
 	MDP_XRGB_8888,    /* RGB 888 padded */
 	MDP_Y_CBCR_H2V2,  /* Y and CbCr, pseudo planer w/ Cb is in MSB */
+	MDP_Y_CBCR_H2V2_ADRENO,  /* Y and CbCr, pseudo planer w/ Cb is in MSB */
 	MDP_ARGB_8888,    /* ARGB 888 */
 	MDP_RGB_888,      /* RGB 888 planer */
 	MDP_Y_CRCB_H2V2,  /* Y and CrCb, pseudo planer w/ Cr is in MSB */
@@ -101,6 +102,20 @@ enum {
 	MDP_BGR_565 = MDP_IMGTYPE2_START,      /* BGR 565 planer */
 	MDP_FB_FORMAT,    /* framebuffer format */
 	MDP_IMGTYPE_LIMIT2 /* Non valid image type after this enum */
+};
+
+enum {
+	MDP_BLOCK_RESERVED = 0,
+	MDP_BLOCK_OVERLAY_0,
+	MDP_BLOCK_OVERLAY_1,
+	MDP_BLOCK_VG_1,
+	MDP_BLOCK_VG_2,
+	MDP_BLOCK_RGB_1,
+	MDP_BLOCK_RGB_2,
+	MDP_BLOCK_DMA_P,
+	MDP_BLOCK_DMA_S,
+	MDP_BLOCK_DMA_E,
+	MDP_BLOCK_MAX,
 };
 
 enum {
@@ -143,6 +158,7 @@ enum {
 #define MDP_SOURCE_ROTATED_90		0x00100000
 #define MDP_MEMORY_ID_TYPE_FB		0x00001000
 #define MDP_DPP_HSIC			0x00080000
+#define MDP_SECURE_OVERLAY_SESSION 0x00008000
 
 #define MDP_TRANSP_NOP 0xffffffff
 #define MDP_ALPHA_NOP 0xff
@@ -271,6 +287,7 @@ struct mdp_overlay {
 	uint32_t flags;
 	uint32_t id;
 	uint32_t user_data[8];
+	struct dpp_ctrl dpp;
 };
 
 struct msmfb_overlay_3d {
