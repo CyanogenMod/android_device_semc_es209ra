@@ -32,6 +32,8 @@ lib/libwmsts.so
 lib/liboemcamera.so
 lib/libmmjpeg.so
 lib/libmmipl.so
+lib/libcamerasemc.so
+lib/libopencore_common.so
 
 ## FIRMWARE
 etc/firmware/yamato_pfp.fw
@@ -65,6 +67,7 @@ bin/updatemiscta
 lib/libmiscta.so
 
 #hw
+lib/hw/sensors.es209ra.so
 lib/hw/copybit.es209ra.so
 lib/hw/gralloc.es209ra.so
 

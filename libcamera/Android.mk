@@ -1,3 +1,4 @@
+ifeq ($(TARGET_CAMERA_SOURCE),true)
 ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),es209ra)
 
 # When zero we link against libmmcamera; when 1, we dlopen libmmcamera.
@@ -33,4 +34,5 @@ endif
 LOCAL_MODULE:= libcamera
 include $(BUILD_SHARED_LIBRARY)
 
+endif
 endif
