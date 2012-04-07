@@ -15,11 +15,10 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
 ARCH_ARM_HAVE_ARMV7A_BUG := true
 ARCH_ARM_HAVE_NEON := true
-#DEBUG_V8 := true
 
 BOARD_USES_GENERIC_AUDIO := false
 
-BUILD_SEMC_SENSORS := true
+BUILD_SEMC_SENSORS := false
 SENSORS_COMPASS_AK897X := true
 SENSORS_ACCEL_BMA150_INPUT := true
 SENSORS_ACCEL_BMA250_INPUT := false
@@ -57,17 +56,16 @@ TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_USES_RECOVERY_CHARGEMODE := false
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/es209ra/recovery/recovery_keys.c
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
+BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0"
+BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 
 BOARD_KERNEL_CMDLINE := console=null
 BOARD_KERNEL_BASE := 0x20000000
-
-BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 
 # A custom ota package maker for a device without a boot partition
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/semc_ota_from_target_files
 
 TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra
 
-#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
-#BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0
 

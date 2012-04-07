@@ -141,7 +141,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     hwui.disable_vsync=true \
     debug.composition.type=mdp \
     debug.sf.hw=1 \
-    persist.sys.usb.config=mtp,adb \
+    persist.sys.usb.config=mass_storage \
     BUILD_UTC_DATE=0
 
 

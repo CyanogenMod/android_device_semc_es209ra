@@ -32,8 +32,6 @@ lib/liboemcamera.so
 lib/libmmjpeg.so
 lib/libmmipl.so
 lib/libcamera.so
-#lib/libopencore_common.so
-
 
 ## FIRMWARE
 etc/firmware/yamato_pfp.fw
@@ -59,6 +57,7 @@ lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 
 ## Other libraries and proprietary binaries
+lib/hw/sensors.es209ra.so
 etc/sensors.conf
 bin/akmd2
 
