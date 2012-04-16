@@ -23,7 +23,7 @@ WIFI_DRIVER_MODULE_NAME     := ar6000
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_CUSTOM_HCIATTACH := true
 
-BUILD_SEMC_SENSORS := true
+BUILD_SEMC_SENSORS := false
 SENSORS_COMPASS_AK897X := true
 SENSORS_ACCEL_BMA150_INPUT := true
 SENSORS_ACCEL_BMA250_INPUT := false
@@ -55,6 +55,9 @@ BOARD_KERNEL_CMDLINE := console=null
 BOARD_KERNEL_BASE := 0x20000000
 
 BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
+
+BOARD_OVERLAY_FORMAT_YCrCb_420_SP := true
+BOARD_CAMERA_USE_GETBUFFERINFO := true
 
 # A custom ota package maker for a device without a boot partition
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/semc_ota_from_target_files
