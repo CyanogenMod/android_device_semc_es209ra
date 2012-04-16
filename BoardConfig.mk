@@ -56,6 +56,9 @@ BOARD_KERNEL_BASE := 0x20000000
 
 BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 
+BOARD_OVERLAY_FORMAT_YCrCb_420_SP := true
+BOARD_CAMERA_USE_GETBUFFERINFO := true
+
 # A custom ota package maker for a device without a boot partition
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/semc_ota_from_target_files
 
