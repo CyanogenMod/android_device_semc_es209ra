@@ -23,6 +23,7 @@ PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_KERNEL):kernel
 
 PRODUCT_PACKAGES += \
+    audio.a2dp.default \
     audio_policy.es209ra \
     audio.primary.es209ra \
     hwcomposer.qsd8k \
