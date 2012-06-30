@@ -70,9 +70,6 @@ on boot
     #allow setting polling rate on bma150
     chown system system /sys/devices/platform/i2c-adapter/i2c-0/0-0038/rate
 
-    #wifi load
-    insmod /modules/ar6000.ko
-
     # USB host support
     mkdir /dev/bus 0771 system system
     mkdir /dev/bus/usb 0771 system system

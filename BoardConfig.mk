@@ -27,6 +27,7 @@ SENSORS_PRESSURE_BMP180 := false
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := AWEXT
+WIFI_DRIVER_MODULE_PATH     := "/modules/ar6000.ko"
 WIFI_DRIVER_MODULE_NAME     := ar6000
 
 BOARD_HAVE_BLUETOOTH := true
@@ -42,6 +43,7 @@ TARGET_USES_GENLOCK := true
 TARGET_FORCE_CPU_UPLOAD := true
 BOARD_EGL_CFG := device/semc/msm7x30-common/prebuilt/egl.cfg
 COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60 -DQCOM_HARDWARE
+ENABLE_WEBGL := true
 
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_AMSS_VERSION := 1240
@@ -65,6 +67,8 @@ BOARD_KERNEL_BASE := 0x20000000
 
 # A custom ota package maker for a device without a boot partition
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/es209ra/releasetools/semc_ota_from_target_files
+
+TARGET_BOOTANIMATION_PRELOAD := true
 
 TARGET_OTA_ASSERT_DEVICE := X10i,X10a,es209ra
 
