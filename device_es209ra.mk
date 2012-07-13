@@ -127,8 +127,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qemu.sf.lcd_density=240 \
     keyguard.no_require_sim=true \
     ro.com.google.locationfeatures=1 \
-    ro.telephony.ril.v3=1\
-    ro.telephony.ril.v3=skipbrokendatacall,signalstrength,datacall \
+    ro.telephony.ril.v3=signalstrength,datacall,skipbrokendatacall,icccardstatus,1 \
     dalvik.vm.dexopt-flags=m=y \
     dalvik.vm.dexopt-data-only=1 \
     dalvik.vm.lockprof.threshold=500 \

@@ -58,8 +58,8 @@ TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_USES_RECOVERY_CHARGEMODE := false
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/es209ra/recovery/recovery_keys.c
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
-BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0"
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
+BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 
 BOARD_KERNEL_CMDLINE := console=null
