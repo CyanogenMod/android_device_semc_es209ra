@@ -64,9 +64,9 @@ on boot
     chown system system /sys/class/leds/lv5219lg:mled/brightness
     chown system system /sys/class/leds/lv5219lg:sled/brightness
     chown system system /sys/class/leds/lv5219lg:fled/spotlight_enable
-    chmod 0600 /sys/class/leds/lv5219lg:fled/spotlight_enable
+    chmod 0666 /sys/class/leds/lv5219lg:fled/spotlight_enable
     chown system system /sys/class/leds/lv5219lg:mled/als_enable
-    chmod 0666 /sys/class/leds/lv5219lg:fled/brightness
+    chmod 0777 /sys/class/leds/lv5219lg:fled/brightness
     #allow setting polling rate on bma150
     chown system system /sys/devices/platform/i2c-adapter/i2c-0/0-0038/rate
 

@@ -33,3 +33,5 @@ fi
   chown wifi.wifi /data/misc/wifi/wpa_supplicant.conf
   chmod 666 /data/misc/wifi/wpa_supplicant.conf
 
+
+chmod 777 /sys/class/leds/lv5219lg:fled/brightness
